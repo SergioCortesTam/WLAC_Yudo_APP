@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_vimeo"
+        android:icon="@drawable/ic_vimeo" android:title="Vimeo"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/nav_x"
+        android:icon="@drawable/ic_x" android:title="X"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/nav_whatsapp"
+        android:icon="@drawable/ic_whatsapp" android:title="WhatsApp"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/nav_youtube"
+        android:icon="@drawable/ic_youtube" android:title="YouTube"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/nav_instagram"
+        android:icon="@drawable/ic_instagram" android:title="Instagram"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/nav_facebook"
+        android:icon="@drawable/ic_facebook" android:title="Facebook"
+        app:showAsAction="ifRoom"/>
+
+</menu>
+    

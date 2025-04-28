@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/club_image"
+            android:layout_width="221dp"
+            android:layout_height="220dp"
+            android:layout_marginBottom="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_wlac" />
+
+        <TextView
+            android:id="@+id/title_historia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nuestra historia"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#F44336"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/texto_historia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Las artes marciales son una disciplina que une la habilidad mental y física con el autocontrol. Si quieres desarrollar seguridad en ti mismo, fortaleza física y mental y velocidad en la toma de decisiones, apuntarte a clases de yudo, yu-yitsu o de defensa personal. En WLAC Yudo te ofrecemos clases grupales e individuales que son adecuadas tanto para principiantes como para expertos. Ubicado en Parla, puedes llamar al +34654745790 sin compromiso para obtener más información."
+            android:textSize="16sp"
+            android:lineSpacingExtra="8dp"
+            android:textColor="#333333" />
+    </LinearLayout>
+</ScrollView>

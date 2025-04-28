@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center">
+
+    <!-- Mostrar nombre del usuario -->
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Usuario"
+        android:textSize="20sp"/>
+
+    <!-- Mostrar cinturón -->
+    <TextView
+        android:id="@+id/userBelt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cinturón: Blanco"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Mostrar clases asignadas -->
+    <TextView
+        android:id="@+id/userClasses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clases asignadas: Judo Básico, Judo Avanzado"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

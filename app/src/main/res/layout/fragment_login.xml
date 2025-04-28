@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FBFBF9"
+    android:padding="24dp"
+    android:gravity="center">
+
+    <!-- Logo de la app (opcional) -->
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/ic_wlac"
+        android:contentDescription="Logo de la app" />
+
+    <!-- Campo de usuario -->
+    <EditText
+        android:id="@+id/edt_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Usuario"
+        android:inputType="text"
+        android:background="#2600D4FF"
+        android:padding="12dp"
+        android:textColor="#333333"
+        android:textColorHint="#888888"
+        android:textSize="16sp"
+        android:layout_below="@id/img_logo"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_usuario"
+        android:drawablePadding="10dp"/>
+
+    <!-- Campo de contraseña -->
+    <EditText
+        android:id="@+id/edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:background="#2600D4FF"
+        android:padding="12dp"
+        android:textColor="#333333"
+        android:textColorHint="#888888"
+        android:textSize="16sp"
+        android:layout_below="@id/edt_username"
+        android:layout_marginTop="16dp"
+        android:drawableLeft="@drawable/ic_contrasena"
+        android:drawablePadding="10dp" />
+
+    <!-- Botón de iniciar sesión -->
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Iniciar sesión"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:background="#0721E9"
+        android:layout_below="@id/edt_password"
+        android:layout_marginTop="24dp" />
+
+    <!-- Opción de 'Olvidé mi contraseña' -->
+    <TextView
+        android:id="@+id/tv_forgot_password"
+        android:layout_width="157dp"
+        android:layout_height="61dp"
+        android:layout_below="@id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="Olvidé mi contraseña"
+        android:textColor="#2196F3"
+        android:textSize="14sp" />
+</RelativeLayout>

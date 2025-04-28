@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txt_productos_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Productos Disponibles"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#F44336"
+            android:layout_marginBottom="12dp" />
+
+        <!-- GridLayout o algo similar para los productos -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <!-- Ejemplo de producto -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_youtube"
+                    android:contentDescription="Producto 1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Producto 1"
+                    android:textSize="14sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
+
+            <!-- Repite para más productos -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_youtube"
+                    android:contentDescription="Producto 2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Producto 2"
+                    android:textSize="14sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
+
+        </GridLayout>
+
+    </LinearLayout>
+</ScrollView>
