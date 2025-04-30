@@ -1,6 +1,5 @@
 package com.example.wlac_yudo_app;
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
+
+    // Botones superiores (se mantienen igual que en tu código original)
     Button btnHistoria, btnHorarios, btnProductos, btnLogin;
 
     // Botones de redes sociales
@@ -43,14 +46,38 @@ public class MainActivity extends AppCompatActivity {
         btnHistoria.setOnClickListener(view -> loadFragment(new HistoriaFragment()));
         btnHorarios.setOnClickListener(view -> loadFragment(new HorariosFragment()));
         btnProductos.setOnClickListener(view -> loadFragment(new ProductosFragment()));
-        btnLogin.setOnClickListener(view -> loadFragment(new LoginFragment()));
 
         // Funciones de botones inferiores (abrir redes)
         btnInstagram.setOnClickListener(view -> openLink("https://www.instagram.com/wlacyudo/#"));
-        btnWhatsapp.setOnClickListener(view -> openLink(""));
+        btnWhatsapp.setOnClickListener(view -> openLink("https://wa.me/123456789"));
         btnYoutube.setOnClickListener(view -> openLink("https://www.youtube.com/channel/UCkLErE2yakUmCuhfEaeuFAg"));
-        btnFacebook.setOnClickListener(view -> openLink("https://www.youtube.com/channel/UCkLErE2yakUmCuhfEaeuFAg"));
+        btnFacebook.setOnClickListener(view -> openLink("https://www.facebook.com"));
         btnX.setOnClickListener(view -> openLink("https://twitter.com"));
+
+        // Lógica para manejar la visualización del fragmento de login o de usuario logueado
+        if (isUserLoggedIn()) {
+            if (isUserProfesor()) {
+                loadFragment(new ProfesorFragment());
+            } else {
+                loadFragment(new AlumnoFragment());
+            }
+        } else {
+            loadFragment(new LoginFragment());
+        }
+
+        // Función para gestionar el botón de Login (mostrar o cerrar sesión según el estado)
+        btnLogin.setOnClickListener(v -> {
+            if (isUserLoggedIn()) {
+                // Si el usuario ya está logueado, redirigir según el rol (Profesor o Alumno)
+                if (isUserProfesor()) {
+                    loadFragment(new ProfesorFragment());
+                } else {
+                    loadFragment(new AlumnoFragment());
+                }
+            } else {
+                loadFragment(new LoginFragment());
+            }
+        });
     }
 
     // Método para cargar fragmentos
@@ -60,9 +87,21 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    // Método para abrir URLs en navegador
+    // Método para abrir URLs en el navegador (redes sociales)
     private void openLink(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
+    }
+
+    // Método para comprobar si el usuario está logueado en Firebase
+    private boolean isUserLoggedIn() {
+        return FirebaseAuth.getInstance().getCurrentUser() != null;
+    }
+
+    // Método para comprobar si el usuario es un profesor
+    private boolean isUserProfesor() {
+        // Esto lo basamos en el email del usuario, por ejemplo, si tiene "@profesor.com"
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        return email != null && email.contains("@profesor.com");
     }
 }

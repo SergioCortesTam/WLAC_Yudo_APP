@@ -51,6 +51,17 @@
             android:text="Login"
             android:textColor="#fff"
             android:background="@android:color/transparent" />
+        <ImageButton
+            android:id="@+id/btn_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_usuario_bloqueado"
+            android:background="@android:color/transparent"
+            android:contentDescription="Perfil"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"/>
+
     </LinearLayout>
 
     <!-- Contenido dinámico -->

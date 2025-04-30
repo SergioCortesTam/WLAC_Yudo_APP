@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/txt_profesor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido, Profesor 👨‍🏫"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="32dp"
+            android:textColor="#000" />
+
+        <Button
+            android:id="@+id/btn_gestionar_cinturones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gestionar Cinturones"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btn_ver_clases"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver Clases de Alumnos"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btn_marcar_asistencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Marcar Asistencia"
+            android:layout_marginBottom="16dp" />
+
+    </LinearLayout>
+
+</ScrollView>

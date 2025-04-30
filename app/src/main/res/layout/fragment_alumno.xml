@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Información del Alumno -->
+    <TextView
+        android:id="@+id/tv_alumno_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre: Juan Pérez"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/tv_alumno_cinturon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cinturón: Azul"
+        android:textSize="18sp"
+        android:layout_below="@id/tv_alumno_nombre"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/tv_clases_alumno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clases"
+        android:textSize="16sp" />
+
+</RelativeLayout>
