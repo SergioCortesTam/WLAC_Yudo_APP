@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/txt_productos_title"
+            android:id="@+id/txt_titulo_productos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Productos Disponibles"

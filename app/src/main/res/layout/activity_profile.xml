@@ -8,7 +8,7 @@
 
     <!-- Mostrar nombre del usuario -->
     <TextView
-        android:id="@+id/userName"
+        android:id="@+id/nombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre del Usuario"
@@ -16,7 +16,7 @@
 
     <!-- Mostrar cinturón -->
     <TextView
-        android:id="@+id/userBelt"
+        android:id="@+id/cinturonUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cinturón: Blanco"
@@ -25,7 +25,7 @@
 
     <!-- Mostrar clases asignadas -->
     <TextView
-        android:id="@+id/userClasses"
+        android:id="@+id/clasesAsignadasUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Clases asignadas: Judo Básico, Judo Avanzado"

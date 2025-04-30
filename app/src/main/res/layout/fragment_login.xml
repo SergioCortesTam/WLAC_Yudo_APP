@@ -8,7 +8,7 @@
 
     <!-- Logo de la app (opcional) -->
     <ImageView
-        android:id="@+id/img_logo"
+        android:id="@+id/logo_app"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_centerHorizontal="true"
@@ -18,7 +18,7 @@
 
     <!-- Campo de usuario -->
     <EditText
-        android:id="@+id/edt_username"
+        android:id="@+id/campo_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Usuario"
@@ -28,14 +28,14 @@
         android:textColor="#333333"
         android:textColorHint="#888888"
         android:textSize="16sp"
-        android:layout_below="@id/img_logo"
+        android:layout_below="@id/logo_app"
         android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/ic_usuario"
         android:drawablePadding="10dp"/>
 
     <!-- Campo de contraseña -->
     <EditText
-        android:id="@+id/edt_password"
+        android:id="@+id/campo_contrasena"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
@@ -45,39 +45,38 @@
         android:textColor="#333333"
         android:textColorHint="#888888"
         android:textSize="16sp"
-        android:layout_below="@id/edt_username"
+        android:layout_below="@id/campo_usuario"
         android:layout_marginTop="16dp"
         android:drawableLeft="@drawable/ic_contrasena"
         android:drawablePadding="10dp" />
 
     <!-- Botón de iniciar sesión -->
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/boton_iniciar_sesion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Iniciar sesión"
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:background="#0721E9"
-        android:layout_below="@id/edt_password"
+        android:layout_below="@id/campo_contrasena"
         android:layout_marginTop="24dp" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/barra_progreso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/btn_login"
+        android:layout_below="@id/boton_iniciar_sesion"
         android:layout_marginTop="20dp"/>
-
 
     <!-- Opción de 'Olvidé mi contraseña' -->
     <TextView
-        android:id="@+id/tv_forgot_password"
+        android:id="@+id/olvido_contrasena"
         android:layout_width="157dp"
         android:layout_height="61dp"
-        android:layout_below="@id/btn_login"
+        android:layout_below="@id/boton_iniciar_sesion"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:clickable="true"

@@ -48,9 +48,10 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Iniciar sesión"
             android:textColor="#fff"
             android:background="@android:color/transparent" />
+
         <ImageButton
             android:id="@+id/btn_profile"
             android:layout_width="40dp"
@@ -138,6 +139,5 @@
             android:background="@android:color/transparent"
             android:contentDescription="Facebook" />
     </LinearLayout>
-
 
 </RelativeLayout>

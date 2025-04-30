@@ -11,7 +11,7 @@
 
         <!-- Titulo de Horarios -->
         <TextView
-            android:id="@+id/txt_horarios_title"
+            android:id="@+id/titulo_horarios"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Horarios de Clases"
@@ -22,14 +22,14 @@
 
         <!-- Spinner para seleccionar los horarios -->
         <Spinner
-            android:id="@+id/spinner_horarios"
+            android:id="@+id/selector_horarios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"/>
 
         <!-- Texto de Precios -->
         <TextView
-            android:id="@+id/txt_precios_title"
+            android:id="@+id/titulo_precios"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Precios"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/txt_chiquiyudo"
+                android:id="@+id/precio_chiquiyudo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Chiquiyudo: 10,00 €\n(Nacidos en 2018 y 2017)"
@@ -55,7 +55,7 @@
                 android:layout_marginBottom="8dp" />
 
             <TextView
-                android:id="@+id/txt_yudo_infantil"
+                android:id="@+id/precio_yudo_infantil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Yudo Infantil: 18,00 €\n(2016 - 2010)"
@@ -64,7 +64,7 @@
                 android:layout_marginBottom="8dp" />
 
             <TextView
-                android:id="@+id/txt_yudo_juvenil"
+                android:id="@+id/precio_yudo_juvenil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Yudo Juvenil: 20,00 €\n(Nacidos en 2009 y anteriores)"
@@ -75,7 +75,7 @@
 
         <!-- Botón para Contactar -->
         <Button
-            android:id="@+id/btn_contactar"
+            android:id="@+id/boton_contactar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="¡Contacta con nosotros para inscribirte!"

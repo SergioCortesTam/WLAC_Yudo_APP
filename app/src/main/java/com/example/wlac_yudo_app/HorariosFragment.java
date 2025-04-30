@@ -28,8 +28,8 @@ public class HorariosFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_horarios, container, false);
 
         // Inicializar el Spinner y el botón de contacto
-        spinnerHorarios = view.findViewById(R.id.spinner_horarios);
-        btnContactar = view.findViewById(R.id.btn_contactar);
+        spinnerHorarios = view.findViewById(R.id.selector_horarios);
+        btnContactar = view.findViewById(R.id.boton_contactar);
 
         // Crear un ArrayList con los horarios directamente en el código
         ArrayList<String> horariosList = new ArrayList<>();
@@ -64,4 +64,3 @@ public class HorariosFragment extends Fragment {
         return view;
     }
 }
-

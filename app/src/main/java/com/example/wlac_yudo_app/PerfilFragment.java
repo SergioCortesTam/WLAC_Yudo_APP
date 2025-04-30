@@ -35,38 +35,38 @@ public class PerfilFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser usuarioActual = mAuth.getCurrentUser();
 
-        if (currentUser != null) {
+        if (usuarioActual != null) {
             // Aquí buscamos en la base de datos si es profesor o alumno
-            String userId = currentUser.getUid();
+            String userId = usuarioActual.getUid();
 
             // Imaginemos que en la base de datos tienes un nodo "users/{userId}/role"
             mDatabase.child("users").child(userId).child("role")
                     .get()
                     .addOnSuccessListener(snapshot -> {
                         if (snapshot.exists()) {
-                            String role = snapshot.getValue(String.class);
-                            if ("profesor".equals(role)) {
-                                loadFragment(new ProfesorFragment());
+                            String rol = snapshot.getValue(String.class);
+                            if ("profesor".equals(rol)) {
+                                cargarFragmento(new ProfesorFragment());
                             } else {
-                                loadFragment(new AlumnoFragment());
+                                cargarFragmento(new AlumnoFragment());
                             }
                         } else {
                             // Por defecto consideramos alumno
-                            loadFragment(new AlumnoFragment());
+                            cargarFragmento(new AlumnoFragment());
                         }
                     })
                     .addOnFailureListener(e -> {
                         // Error leyendo el rol -> mandamos a alumno por defecto
-                        loadFragment(new AlumnoFragment());
+                        cargarFragmento(new AlumnoFragment());
                     });
         }
 
         return view;
     }
 
-    private void loadFragment(Fragment fragment) {
+    private void cargarFragmento(Fragment fragment) {
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, fragment);
         transaction.commit();

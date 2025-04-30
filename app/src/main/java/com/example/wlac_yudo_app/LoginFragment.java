@@ -21,8 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginFragment extends Fragment {
 
-    private EditText edtUsername, edtPassword;
-    private Button btnLogin;
+    private EditText edtUsuario, edtContraseña;
+    private Button btnIniciarSesion;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db; // 🔥 Firestore
 
@@ -37,37 +37,37 @@ public class LoginFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        edtUsername = view.findViewById(R.id.edt_username);
-        edtPassword = view.findViewById(R.id.edt_password);
-        btnLogin = view.findViewById(R.id.btn_login);
+        edtUsuario = view.findViewById(R.id.campo_usuario);
+        edtContraseña = view.findViewById(R.id.campo_contrasena);
+        btnIniciarSesion = view.findViewById(R.id.boton_iniciar_sesion);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance(); // 🔥 Instanciamos Firestore
 
-        btnLogin.setOnClickListener(v -> loginUser());
+        btnIniciarSesion.setOnClickListener(v -> iniciarSesion());
 
         return view;
     }
 
-    private void loginUser() {
-        String email = edtUsername.getText().toString().trim();
-        String password = edtPassword.getText().toString().trim();
+    private void iniciarSesion() {
+        String correo = edtUsuario.getText().toString().trim();
+        String contraseña = edtContraseña.getText().toString().trim();
 
-        if (TextUtils.isEmpty(email)) {
-            edtUsername.setError("Ingresa tu correo");
+        if (TextUtils.isEmpty(correo)) {
+            edtUsuario.setError("Ingresa tu correo");
             return;
         }
-        if (TextUtils.isEmpty(password)) {
-            edtPassword.setError("Ingresa tu contraseña");
+        if (TextUtils.isEmpty(contraseña)) {
+            edtContraseña.setError("Ingresa tu contraseña");
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(correo, contraseña)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        if (user != null) {
-                            checkUserRole(user.getUid());
+                        FirebaseUser usuario = mAuth.getCurrentUser();
+                        if (usuario != null) {
+                            verificarRolUsuario(usuario.getUid());
                         }
                     } else {
                         Toast.makeText(getContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -75,16 +75,16 @@ public class LoginFragment extends Fragment {
                 });
     }
 
-    private void checkUserRole(String uid) {
+    private void verificarRolUsuario(String uid) {
         db.collection("users").document(uid).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        String role = documentSnapshot.getString("role");
-                        if (role != null) {
-                            if (role.equalsIgnoreCase("profesor")) {
-                                loadFragment(new ProfesorFragment());
-                            } else if (role.equalsIgnoreCase("alumno")) {
-                                loadFragment(new AlumnoFragment());
+                        String rol = documentSnapshot.getString("role");
+                        if (rol != null) {
+                            if (rol.equalsIgnoreCase("profesor")) {
+                                cargarFragmento(new ProfesorFragment());
+                            } else if (rol.equalsIgnoreCase("alumno")) {
+                                cargarFragmento(new AlumnoFragment());
                             } else {
                                 Toast.makeText(getContext(), "Rol desconocido", Toast.LENGTH_SHORT).show();
                             }
@@ -100,7 +100,7 @@ public class LoginFragment extends Fragment {
                 });
     }
 
-    private void loadFragment(Fragment fragment) {
+    private void cargarFragmento(Fragment fragment) {
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, fragment);
         transaction.addToBackStack(null); // Para poder volver atrás si quieres
