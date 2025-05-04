@@ -1,31 +1,51 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:padding="24dp">
 
-    <!-- Información del Alumno -->
-    <TextView
-        android:id="@+id/tv_alumno_nombre"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre: Juan Pérez"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_alumno_cinturon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cinturón: Azul"
-        android:textSize="18sp"
-        android:layout_below="@id/tv_alumno_nombre"
-        android:layout_marginTop="10dp" />
+        <!-- Información del alumno -->
+        <TextView
+            android:id="@+id/tv_alumno_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
 
-    <TextView
-        android:id="@+id/tv_clases_alumno"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clases"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_alumno_cinturon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cinturón: "
+            android:textSize="18sp"
+            android:layout_marginBottom="12dp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_clases_alumno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clases: "
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btn_ver_asistencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver Asistencia"
+            android:layout_below="@id/tv_clases_alumno"
+            android:layout_marginTop="20dp"/>
+
+
+        <!-- Aquí se pueden agregar más cosas luego como asistencias -->
+
+    </LinearLayout>
+
+</ScrollView>
