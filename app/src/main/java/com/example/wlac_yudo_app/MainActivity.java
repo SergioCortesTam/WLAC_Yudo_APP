@@ -1,105 +1,155 @@
 package com.example.wlac_yudo_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Botones superiores
-    Button btnHistoria, btnHorarios, btnProductos, btnIniciarSesion;
+    private Button btnHistoria, btnHorarios, btnProductos;
+    private ImageButton btnLoginIcono;
+    private ImageButton btnInstagram, btnWhatsapp, btnYoutube, btnFacebook, btnX;
 
-    // Botones de redes sociales
-    ImageButton btnInstagram, btnWhatsapp, btnYoutube, btnFacebook, btnX;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private SharedPreferences prefs;
+    private static final String PREFS = "app_prefs";
+    private static final String KEY_SESSION = "session_activa";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Inicialización de botones superiores
-        btnHistoria = findViewById(R.id.btn_historia);
-        btnHorarios = findViewById(R.id.btn_horarios);
-        btnProductos = findViewById(R.id.btn_productos);
-        btnIniciarSesion = findViewById(R.id.btn_login);
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
 
-        // Inicialización de botones inferiores (redes)
+        // Botones top
+        btnHistoria   = findViewById(R.id.btn_historia);
+        btnHorarios   = findViewById(R.id.btn_horarios);
+        btnProductos  = findViewById(R.id.btn_productos);
+        btnLoginIcono = findViewById(R.id.btn_login_icono);
+
+        // Botones redes
         btnInstagram = findViewById(R.id.btn_instagram);
-        btnWhatsapp = findViewById(R.id.btn_whatsapp);
-        btnYoutube = findViewById(R.id.btn_youtube);
-        btnFacebook = findViewById(R.id.btn_facebook);
-        btnX = findViewById(R.id.btn_x);
+        btnWhatsapp  = findViewById(R.id.btn_whatsapp);
+        btnYoutube   = findViewById(R.id.btn_youtube);
+        btnFacebook  = findViewById(R.id.btn_facebook);
+        btnX         = findViewById(R.id.btn_x);
 
-        // Fragmento inicial al abrir la app
+        // Fragmento inicial
         cargarFragmento(new HistoriaFragment());
 
-        // Funciones de botones superiores
-        btnHistoria.setOnClickListener(view -> cargarFragmento(new HistoriaFragment()));
-        btnHorarios.setOnClickListener(view -> cargarFragmento(new HorariosFragment()));
-        btnProductos.setOnClickListener(view -> cargarFragmento(new ProductosFragment()));
+        // Listeners
+        btnHistoria.setOnClickListener(v -> cargarFragmento(new HistoriaFragment()));
+        btnHorarios.setOnClickListener(v -> cargarFragmento(new HorariosFragment()));
+        btnProductos.setOnClickListener(v -> cargarFragmento(new ProductosFragment()));
 
-        // Funciones de botones inferiores (abrir redes)
-        btnInstagram.setOnClickListener(view -> abrirEnlace("https://www.instagram.com/wlacyudo/#"));
-        btnWhatsapp.setOnClickListener(view -> abrirEnlace("https://wa.me/123456789"));
-        btnYoutube.setOnClickListener(view -> abrirEnlace("https://www.youtube.com/channel/UCkLErE2yakUmCuhfEaeuFAg"));
-        btnFacebook.setOnClickListener(view -> abrirEnlace("https://www.facebook.com"));
-        btnX.setOnClickListener(view -> abrirEnlace("https://twitter.com"));
+        btnInstagram.setOnClickListener(v -> abrirEnlace("https://www.instagram.com/wlacyudo/#"));
+        btnWhatsapp .setOnClickListener(v -> abrirEnlace("https://wa.me/123456789"));
+        btnYoutube  .setOnClickListener(v -> abrirEnlace("https://www.youtube.com/channel/UCkLErE2yakUmCuhfEaeuFAg"));
+        btnFacebook .setOnClickListener(v -> abrirEnlace("https://www.facebook.com"));
+        btnX        .setOnClickListener(v -> abrirEnlace("https://twitter.com"));
 
-        // Lógica para manejar la visualización del fragmento de login o de usuario logueado
-        if (estaUsuarioLogueado()) {
-            if (esUsuarioProfesor()) {
-                cargarFragmento(new ProfesorFragment());
-            } else {
-                cargarFragmento(new AlumnoFragment());
-            }
-        } else {
-            cargarFragmento(new LoginFragment());
-        }
+        btnLoginIcono.setOnClickListener(v -> {
+            boolean logueado = mAuth.getCurrentUser() != null;
+            boolean sessionActiva = prefs.getBoolean(KEY_SESSION, false);
 
-        // Función para gestionar el botón de Iniciar Sesión (mostrar o cerrar sesión según el estado)
-        btnIniciarSesion.setOnClickListener(v -> {
-            if (estaUsuarioLogueado()) {
-                if (esUsuarioProfesor()) {
-                    cargarFragmento(new ProfesorFragment());
-                } else {
-                    cargarFragmento(new AlumnoFragment());
-                }
-            } else {
+            if (!logueado || !sessionActiva) {
                 cargarFragmento(new LoginFragment());
+            } else {
+                mostrarMenuSesion(v);
             }
         });
     }
 
-    // Método para cargar fragmentos
-    private void cargarFragmento(Fragment fragmento) {
-        FragmentTransaction transaccion = getSupportFragmentManager().beginTransaction();
-        transaccion.replace(R.id.main_content, fragmento);
-        transaccion.commit();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        actualizarIconoSesion();
     }
 
-    // Método para abrir URLs en el navegador (redes sociales)
+    private void actualizarIconoSesion() {
+        boolean logueado = mAuth.getCurrentUser() != null;
+        boolean sessionActiva = prefs.getBoolean(KEY_SESSION, false);
+
+        btnLoginIcono.setImageResource(
+                (logueado && sessionActiva)
+                        ? R.drawable.ic_usuario_desbloqueado
+                        : R.drawable.ic_usuario_bloqueado
+        );
+    }
+
+    private void mostrarMenuSesion(View anchor) {
+        PopupMenu menu = new PopupMenu(this, anchor);
+        menu.getMenuInflater().inflate(R.menu.menu_sesion, menu.getMenu());
+        menu.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.menu_ver_perfil) {
+                mostrarPerfilSegunRol();
+                return true;
+            } else if (id == R.id.menu_cerrar_sesion) {
+                mAuth.signOut();
+                prefs.edit().putBoolean(KEY_SESSION, false).apply();
+                actualizarIconoSesion();
+                cargarFragmento(new HistoriaFragment());
+                return true;
+            }
+            return false;
+        });
+        menu.show();
+    }
+
+    private void cargarFragmento(Fragment f) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_content, f);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
     private void abrirEnlace(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(intent);
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
-    // Método para comprobar si el usuario está logueado en Firebase
-    private boolean estaUsuarioLogueado() {
-        return FirebaseAuth.getInstance().getCurrentUser() != null;
-    }
+    // ✅ NUEVO: Detectar rol real desde Firestore
+    private void mostrarPerfilSegunRol() {
+        String email = mAuth.getCurrentUser() != null ?
+                mAuth.getCurrentUser().getEmail() : null;
 
-    // Método para comprobar si el usuario es un profesor
-    private boolean esUsuarioProfesor() {
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        return email != null && email.contains("@profesor.com");
+        if (email == null) return;
+
+        db.collection("users")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (!snapshot.isEmpty()) {
+                        String rol = snapshot.getDocuments().get(0).getString("role");
+
+                        Fragment fragment;
+                        if ("profesor".equalsIgnoreCase(rol)) {
+                            fragment = new ProfesorFragment();
+                        } else {
+                            fragment = new AlumnoFragment();
+                        }
+
+                        cargarFragmento(fragment);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Podrías mostrar un Toast de error aquí si quieres
+                });
     }
 }

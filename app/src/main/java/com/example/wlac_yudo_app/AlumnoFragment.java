@@ -35,15 +35,16 @@ public class AlumnoFragment extends Fragment {
         tvNombre = view.findViewById(R.id.tv_alumno_nombre);
         tvCinturon = view.findViewById(R.id.tv_alumno_cinturon);
         tvClases = view.findViewById(R.id.tv_clases_alumno);
-        btnVerAsistencia = view.findViewById(R.id.btn_ver_asistencia); // asegúrate de tenerlo en tu XML
+        btnVerAsistencia = view.findViewById(R.id.btn_ver_asistencia);
 
         db = FirebaseFirestore.getInstance();
 
-        String email = FirebaseAuth.getInstance().getCurrentUser() != null ?
-                FirebaseAuth.getInstance().getCurrentUser().getEmail() : null;
+        String email = FirebaseAuth.getInstance().getCurrentUser() != null
+                ? FirebaseAuth.getInstance().getCurrentUser().getEmail()
+                : null;
 
         if (email != null) {
-            db.collection("Users")
+            db.collection("users") // 👈 Asegúrate de que está en minúsculas
                     .whereEqualTo("email", email)
                     .get()
                     .addOnSuccessListener(querySnapshot -> {
@@ -51,20 +52,28 @@ public class AlumnoFragment extends Fragment {
                             DocumentSnapshot doc = querySnapshot.getDocuments().get(0);
                             String nombre = doc.getString("nombre");
                             String cinturon = doc.getString("cinturon");
-                            List<String> clases = (List<String>) doc.get("clases");
 
                             tvNombre.setText("Nombre: " + (nombre != null ? nombre : "Desconocido"));
                             tvCinturon.setText("Cinturón: " + (cinturon != null ? cinturon : "No asignado"));
 
-                            if (clases != null && !clases.isEmpty()) {
-                                StringBuilder clasesTexto = new StringBuilder("Clases:\n");
-                                for (String clase : clases) {
-                                    clasesTexto.append("• ").append(clase).append("\n");
+                            Object clasesField = doc.get("clases");
+                            if (clasesField instanceof List) {
+                                List<String> clases = (List<String>) clasesField;
+                                if (!clases.isEmpty()) {
+                                    StringBuilder clasesTexto = new StringBuilder("Clases:\n");
+                                    for (String clase : clases) {
+                                        clasesTexto.append("• ").append(clase).append("\n");
+                                    }
+                                    tvClases.setText(clasesTexto.toString());
+                                } else {
+                                    tvClases.setText("Clases: No asignadas aún");
                                 }
-                                tvClases.setText(clasesTexto.toString());
+                            } else if (clasesField instanceof String) {
+                                tvClases.setText("Clases:\n" + clasesField.toString());
                             } else {
                                 tvClases.setText("Clases: No asignadas aún");
                             }
+
                         } else {
                             tvNombre.setText("Usuario no encontrado.");
                         }
@@ -77,7 +86,7 @@ public class AlumnoFragment extends Fragment {
         btnVerAsistencia.setOnClickListener(v -> {
             getParentFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_content, new AsistenciaFragment())
+                    .replace(R.id.main_content, new VerAsistenciasAlumnoFragment())
                     .addToBackStack(null)
                     .commit();
         });

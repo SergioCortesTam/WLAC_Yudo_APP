@@ -15,34 +15,34 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginFragment extends Fragment {
 
-    private EditText edtUsuario, edtContraseña;
+    private EditText edtUsuario, edtContrasena;
     private Button btnIniciarSesion;
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db; // 🔥 Firestore
+    private FirebaseFirestore db;
 
-    public LoginFragment() {
-        // Constructor vacío obligatorio
-    }
+    // SharedPreferences
+    private static final String PREFS = "app_prefs";
+    private static final String KEY_SESSION = "session_activa";
 
-    @Nullable
-    @Override
+    public LoginFragment() {}
+
+    @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        edtUsuario = view.findViewById(R.id.campo_usuario);
-        edtContraseña = view.findViewById(R.id.campo_contrasena);
+        edtUsuario       = view.findViewById(R.id.campo_usuario);
+        edtContrasena    = view.findViewById(R.id.campo_contrasena);
         btnIniciarSesion = view.findViewById(R.id.boton_iniciar_sesion);
 
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance(); // 🔥 Instanciamos Firestore
+        db    = FirebaseFirestore.getInstance();
 
         btnIniciarSesion.setOnClickListener(v -> iniciarSesion());
 
@@ -51,59 +51,61 @@ public class LoginFragment extends Fragment {
 
     private void iniciarSesion() {
         String correo = edtUsuario.getText().toString().trim();
-        String contraseña = edtContraseña.getText().toString().trim();
+        String pass   = edtContrasena.getText().toString().trim();
 
         if (TextUtils.isEmpty(correo)) {
             edtUsuario.setError("Ingresa tu correo");
             return;
         }
-        if (TextUtils.isEmpty(contraseña)) {
-            edtContraseña.setError("Ingresa tu contraseña");
+        if (TextUtils.isEmpty(pass)) {
+            edtContrasena.setError("Ingresa tu contraseña");
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(correo, contraseña)
+        mAuth.signInWithEmailAndPassword(correo, pass)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser usuario = mAuth.getCurrentUser();
-                        if (usuario != null) {
-                            verificarRolUsuario(usuario.getUid());
-                        }
+                        // Guardar flag de sesión activa
+                        requireActivity()
+                                .getSharedPreferences(PREFS, requireActivity().MODE_PRIVATE)
+                                .edit()
+                                .putBoolean(KEY_SESSION, true)
+                                .apply();
+                        verificarRolPorEmail(correo);
                     } else {
-                        Toast.makeText(getContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),
+                                "Error de autenticación: " + task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
                     }
                 });
     }
 
-    private void verificarRolUsuario(String uid) {
-        db.collection("users").document(uid).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        String rol = documentSnapshot.getString("role");
-                        if (rol != null) {
-                            if (rol.equalsIgnoreCase("profesor")) {
-                                cargarFragmento(new ProfesorFragment());
-                            } else if (rol.equalsIgnoreCase("alumno")) {
-                                cargarFragmento(new AlumnoFragment());
-                            } else {
-                                Toast.makeText(getContext(), "Rol desconocido", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(getContext(), "No se encontró el rol", Toast.LENGTH_SHORT).show();
-                        }
+    private void verificarRolPorEmail(String correo) {
+        db.collection("users")
+                .whereEqualTo("email", correo)
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (!snapshot.isEmpty()) {
+                        // Aquí usamos DocumentSnapshot
+                        DocumentSnapshot doc = snapshot.getDocuments().get(0);
+                        String rol = doc.getString("role");
+                        // Navegar sin volver al login
+                        Fragment destino = "profesor".equalsIgnoreCase(rol)
+                                ? new ProfesorFragment()
+                                : new AlumnoFragment();
+                        requireActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_content, destino)
+                                .commit();
                     } else {
-                        Toast.makeText(getContext(), "No se encontró el usuario", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),
+                                "No se encontró tu perfil en la base de datos.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al obtener rol: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
-    }
-
-    private void cargarFragmento(Fragment fragment) {
-        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_content, fragment);
-        transaction.addToBackStack(null); // Para poder volver atrás si quieres
-        transaction.commit();
+                .addOnFailureListener(e -> Toast.makeText(getContext(),
+                        "Error al consultar rol: " + e.getMessage(),
+                        Toast.LENGTH_LONG).show());
     }
 }
