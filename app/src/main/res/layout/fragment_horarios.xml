@@ -1,86 +1,320 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/secondary"
+    android:fillViewport="true">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_md">
 
-        <!-- Titulo de Horarios -->
+        <!-- Header -->
         <TextView
-            android:id="@+id/titulo_horarios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Horarios de Clases"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#F44336"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Spinner para seleccionar los horarios -->
-        <Spinner
-            android:id="@+id/selector_horarios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"/>
+            android:text="Club de Judo"
+            android:textAppearance="@style/TextAppearance.App.Display"
+            android:textColor="@color/primary"
+            android:layout_marginBottom="@dimen/spacing_md" />
 
-        <!-- Texto de Precios -->
-        <TextView
-            android:id="@+id/titulo_precios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Precios"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#F44336"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Precios -->
-        <LinearLayout
-            android:orientation="vertical"
+        <!-- Card Horarios -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.App.CardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_lg">
 
-            <TextView
-                android:id="@+id/precio_chiquiyudo"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chiquiyudo: 10,00 €\n(Nacidos en 2018 y 2017)"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginBottom="8dp" />
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
 
-            <TextView
-                android:id="@+id/precio_yudo_infantil"
+                <!-- Título con icono -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_medium"
+                        android:layout_height="@dimen/icon_medium"
+                        android:src="@drawable/ic_usuario"
+                        android:tint="@color/primary"
+                        android:layout_marginEnd="@dimen/spacing_sm"/>
+
+                    <TextView
+                        android:id="@+id/titulo_horarios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Horarios de Clases"
+                        android:textAppearance="@style/TextAppearance.App.Title"
+                        android:textColor="@color/primary" />
+                </LinearLayout>
+
+                <!-- Selector mejorado -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.App.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Selecciona un horario"
+                    app:startIconDrawable="@drawable/ic_usuario"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/selector_horarios"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Tabla de horarios -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
+
+                    <!-- Cabecera -->
+                    <TableRow
+                        android:background="@color/primary"
+                        android:padding="@dimen/spacing_sm">
+                        <TextView
+                            android:text="Día"
+                            android:textAppearance="@style/TextAppearance.App.BodyLarge"
+                            android:textColor="@color/text_white"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:text="Hora"
+                            android:textAppearance="@style/TextAppearance.App.BodyLarge"
+                            android:textColor="@color/text_white"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:text="Grupo"
+                            android:textAppearance="@style/TextAppearance.App.BodyLarge"
+                            android:textColor="@color/text_white"
+                            android:textStyle="bold"/>
+                    </TableRow>
+
+                    <!-- Filas de ejemplo - dinámicas en la app real -->
+                    <TableRow android:padding="@dimen/spacing_sm">
+                        <TextView android:text="Lunes" android:textAppearance="@style/TextAppearance.App.Body"/>
+                        <TextView android:text="17:30-18:30" android:textAppearance="@style/TextAppearance.App.Body"/>
+                        <TextView android:text="Chiquiyudo" android:textAppearance="@style/TextAppearance.App.Body"/>
+                    </TableRow>
+
+                    <TableRow android:padding="@dimen/spacing_sm"
+                        android:background="@color/secondary">
+                        <TextView android:text="Lunes" android:textAppearance="@style/TextAppearance.App.Body"/>
+                        <TextView android:text="18:30-19:30" android:textAppearance="@style/TextAppearance.App.Body"/>
+                        <TextView android:text="Infantil" android:textAppearance="@style/TextAppearance.App.Body"/>
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card Precios -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.App.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_lg">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Yudo Infantil: 18,00 €\n(2016 - 2010)"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginBottom="8dp" />
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
 
-            <TextView
-                android:id="@+id/precio_yudo_juvenil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Yudo Juvenil: 20,00 €\n(Nacidos en 2009 y anteriores)"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginBottom="16dp" />
-        </LinearLayout>
+                <!-- Título con icono -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/spacing_md">
 
-        <!-- Botón para Contactar -->
-        <Button
+                    <ImageView
+                        android:layout_width="@dimen/icon_medium"
+                        android:layout_height="@dimen/icon_medium"
+                        android:src="@drawable/ic_contrasena"
+                        android:tint="@color/accent"
+                        android:layout_marginEnd="@dimen/spacing_sm"/>
+
+                    <TextView
+                        android:id="@+id/titulo_precios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Precios"
+                        android:textAppearance="@style/TextAppearance.App.Title"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+
+                <!-- Cards de precios -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Precio Chiquiyudo -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_md"
+                        app:cardBackgroundColor="@color/cinturon_blanco"
+                        app:cardCornerRadius="@dimen/corner_md"
+                        app:strokeColor="@color/primary_light"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/spacing_md">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Chiquiyudo"
+                                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                                    android:textColor="@color/text_primary"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nacidos en 2018 y 2017"
+                                    android:textAppearance="@style/TextAppearance.App.Caption"
+                                    android:textColor="@color/text_secondary"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="10,00 €"
+                                android:textAppearance="@style/TextAppearance.App.Headline"
+                                android:textColor="@color/primary"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Precio Yudo Infantil - similar estructura -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_md"
+                        app:cardBackgroundColor="@color/cinturon_amarillo"
+                        app:cardCornerRadius="@dimen/corner_md"
+                        app:strokeColor="@color/primary_light"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/spacing_md">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yudo Infantil"
+                                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                                    android:textColor="@color/text_primary"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2016 - 2010"
+                                    android:textAppearance="@style/TextAppearance.App.Caption"
+                                    android:textColor="@color/text_secondary"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="18,00 €"
+                                android:textAppearance="@style/TextAppearance.App.Headline"
+                                android:textColor="@color/primary"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Precio Yudo Juvenil - similar estructura -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/cinturon_verde"
+                        app:cardCornerRadius="@dimen/corner_md"
+                        app:strokeColor="@color/primary_light"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/spacing_md">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yudo Juvenil"
+                                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                                    android:textColor="@color/text_primary"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nacidos en 2009 y anteriores"
+                                    android:textAppearance="@style/TextAppearance.App.Caption"
+                                    android:textColor="@color/text_secondary"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="20,00 €"
+                                android:textAppearance="@style/TextAppearance.App.Headline"
+                                android:textColor="@color/primary"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botón de Contacto -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/boton_contactar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="¡Contacta con nosotros para inscribirte!"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp" />
-
+            android:textAppearance="@style/TextAppearance.App.BodyLarge"
+            android:textColor="@color/text_white"
+            app:icon="@drawable/ic_usuario"
+            app:cornerRadius="@dimen/corner_md"
+            android:padding="@dimen/spacing_md"
+            style="@style/Widget.App.Button.Secondary"/>
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

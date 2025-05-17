@@ -30,7 +30,8 @@ public class VerAsistenciasAlumnoFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ver_asistencias_alumno, container, false);
 
-        layoutAsistencias = view.findViewById(R.id.layout_lista_asistencias);
+        // Usar el nuevo ID simplificado
+        layoutAsistencias = view.findViewById(R.id.layoutAsistencias);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 

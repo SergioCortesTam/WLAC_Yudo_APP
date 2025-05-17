@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Espaciado general -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xxl">48dp</dimen>
+
+    <!-- Tamaños de texto -->
+    <dimen name="text_caption">12sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_body_large">16sp</dimen>
+    <dimen name="text_subtitle">18sp</dimen>
+    <dimen name="text_title">20sp</dimen>
+    <dimen name="text_headline">24sp</dimen>
+    <dimen name="text_display">34sp</dimen>
+
+    <!-- Elevaciones -->
+    <dimen name="elevation_card">4dp</dimen>
+    <dimen name="elevation_appbar">6dp</dimen>
+    <dimen name="elevation_fab">8dp</dimen>
+    <dimen name="elevation_dialog">24dp</dimen>
+
+    <!-- Esquinas redondeadas -->
+    <dimen name="corner_sm">4dp</dimen>
+    <dimen name="corner_md">8dp</dimen>
+    <dimen name="corner_lg">16dp</dimen>
+    <dimen name="corner_xl">24dp</dimen>
+
+    <!-- Iconos -->
+    <dimen name="icon_small">24dp</dimen>
+    <dimen name="icon_medium">36dp</dimen>
+    <dimen name="icon_large">48dp</dimen>
+    <dimen name="icon_xlarge">64dp</dimen>
+
+    <!-- Botones -->
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_min_width">120dp</dimen>
+
+    <!-- Imágenes -->
+    <dimen name="image_avatar">40dp</dimen>
+    <dimen name="image_thumbnail">80dp</dimen>
+    <dimen name="image_medium">120dp</dimen>
+    <dimen name="image_large">200dp</dimen>
+
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>

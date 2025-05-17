@@ -1,13 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="divider">#DDDDDD</color> <!-- gris claro típico de divisor -->
+    <color name="secondary_light">#FFB74D</color> <!-- Ejemplo: naranja claro -->
+    <color name="background_light">#F5F5F5</color> <!-- Gris claro común -->
+    <color name="colorAccent">#FF4081</color> <!-- Rosa vibrante por defecto en Material Design -->
+
+    <!-- Paleta de colores principal -->
+    <color name="primary">#2E51A2</color>             <!-- Azul judo (color olímpico) -->
+    <color name="primary_dark">#1C3771</color>        <!-- Azul más oscuro para la barra de estado -->
+    <color name="primary_light">#A6C0FF</color>       <!-- Azul claro para acentos suaves -->
+    <color name="accent">#FF5722</color>              <!-- Naranja para acciones y elementos destacados -->
+    <color name="accent_light">#FFAB91</color>        <!-- Naranja claro para fondos sutiles -->
+
+    <!-- Colores secundarios -->
+    <color name="secondary">#F0F4FF</color>           <!-- Azul muy suave para fondos -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Colores de texto -->
+    <color name="text_primary">#212121</color>        <!-- Texto principal (casi negro) -->
+    <color name="text_secondary">#757575</color>      <!-- Texto secundario (gris oscuro) -->
+    <color name="text_hint">#BDBDBD</color>           <!-- Texto de pistas (gris claro) -->
+    <color name="text_white">#FFFFFF</color>          <!-- Texto blanco para fondos oscuros -->
+
+    <!-- Colores de estado -->
+    <color name="success">#4CAF50</color>             <!-- Verde para confirmaciones -->
+    <color name="warning">#FFC107</color>             <!-- Amarillo para advertencias -->
+    <color name="error">#F44336</color>               <!-- Rojo para errores -->
+
+    <!-- Colores de cinturones -->
+    <color name="cinturon_blanco">#FFFFFF</color>
+    <color name="cinturon_amarillo">#FDD835</color>
+    <color name="cinturon_naranja">#FF9800</color>
+    <color name="cinturon_verde">#4CAF50</color>
+    <color name="cinturon_azul">#2196F3</color>
+    <color name="cinturon_marron">#795548</color>
+    <color name="cinturon_negro">#212121</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
     <color name="colorPrimary">#6200EE</color> <color name="colorPrimaryVariant">#3700B3</color> <color name="colorOnPrimary">@color/white</color>
 
-    <color name="toolbar_background_light">#FAFAFA</color> <color name="toolbar_text_light">#424242</color> <color name="bottom_nav_item_active_light">#212121</color> <color name="bottom_nav_item_inactive_light">#BDBDBD</color> </resources>
+    <color name="toolbar_background_light">#FAFAFA</color> <color name="toolbar_text_light">#424242</color> <color name="bottom_nav_item_active_light">#212121</color> <color name="bottom_nav_item_inactive_light">#BDBDBD</color>
+</resources>

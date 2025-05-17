@@ -1,69 +1,248 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="#FAFAFA">
+    android:background="@color/secondary"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_lg">
 
-        <!-- Card: Perfil del alumno -->
-        <androidx.cardview.widget.CardView
+        <!-- Header with profile information -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:backgroundTint="#FFFFFF">
+            android:layout_marginBottom="@dimen/spacing_lg"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/elevation_card">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="@dimen/spacing_lg">
 
-                <TextView
-                    android:id="@+id/tv_alumno_nombre"
-                    android:layout_width="wrap_content"
+                <!-- Profile header with avatar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nombre: "
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="#212121"
-                    android:layout_marginBottom="12dp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/spacing_md">
 
-                <TextView
-                    android:id="@+id/tv_alumno_cinturon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cinturón: "
-                    android:textSize="18sp"
-                    android:textColor="#424242"
-                    android:layout_marginBottom="12dp" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/avatar_alumno"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_usuario"
+                        app:shapeAppearanceOverlay="@style/CircleImageView"
+                        android:contentDescription="Avatar del alumno"
+                        android:layout_marginEnd="@dimen/spacing_md"/>
 
-                <TextView
-                    android:id="@+id/tv_clases_alumno"
-                    android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_alumno_nombre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nombre del Alumno"
+                            android:textAppearance="@style/TextAppearance.App.Headline"
+                            android:textColor="@color/primary"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:id="@+id/tv_alumno_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ID: 12345"
+                            android:textAppearance="@style/TextAppearance.App.Caption"
+                            android:textColor="@color/text_secondary" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider"
+                    android:layout_marginVertical="@dimen/spacing_md" />
+
+                <!-- Student Information -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Clases: "
-                    android:textSize="16sp"
-                    android:textColor="#616161" />
+                    android:orientation="vertical">
+
+                    <!-- Belt Information with colored indicator -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/spacing_md">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cinturón:"
+                            android:textAppearance="@style/TextAppearance.App.Body"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="@dimen/spacing_md" />
+
+                        <TextView
+                            android:id="@+id/tv_alumno_cinturon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Amarillo"
+                            android:textAppearance="@style/TextAppearance.App.Body"
+                            android:layout_marginEnd="@dimen/spacing_md" />
+
+                        <View
+                            android:id="@+id/view_color_cinturon"
+                            android:layout_width="32dp"
+                            android:layout_height="12dp"
+                            android:background="#FFEB3B" />
+                    </LinearLayout>
+
+                    <!-- Class Information -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/spacing_md">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Clases:"
+                            android:textAppearance="@style/TextAppearance.App.Body"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="@dimen/spacing_md" />
+
+                        <TextView
+                            android:id="@+id/tv_clases_alumno"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lunes y Miércoles 18:00-19:30"
+                            android:textAppearance="@style/TextAppearance.App.Body" />
+                    </LinearLayout>
+
+                    <!-- Attendance Statistics -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Asistencia:"
+                            android:textAppearance="@style/TextAppearance.App.Body"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="@dimen/spacing_md" />
+
+                        <TextView
+                            android:id="@+id/tv_stats_asistencia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="85% (35/41 clases)"
+                            android:textAppearance="@style/TextAppearance.App.Body" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Botón de asistencia -->
-        <Button
-            android:id="@+id/btn_ver_asistencia"
+        <!-- Progress Card -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ver Asistencia"
-            android:backgroundTint="@color/purple_700"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            android:padding="12dp"
-            android:elevation="4dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_marginBottom="@dimen/spacing_lg"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/elevation_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Progreso"
+                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progress_next_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:progress="65"
+                    app:trackColor="@color/secondary_light"
+                    app:indicatorColor="@color/accent"
+                    app:trackThickness="8dp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_progress_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="65% completado para el siguiente cinturón"
+                    android:textAppearance="@style/TextAppearance.App.Caption"
+                    android:gravity="end" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Actions Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/elevation_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Acciones"
+                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_ver_asistencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ver historial de asistencia"
+                    app:icon="@drawable/ic_usuario"
+                    app:iconGravity="textStart"
+                    android:layout_marginBottom="@dimen/spacing_sm" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_proxima_clase"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ver próxima clase"
+                    app:icon="@drawable/ic_whatsapp"
+                    app:iconGravity="textStart" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

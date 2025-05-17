@@ -43,7 +43,8 @@ public class MarcarAsistenciaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_marcar_asistencia, container, false);
 
         db = FirebaseFirestore.getInstance();
-        layoutAlumnos = view.findViewById(R.id.layout_alumnos);
+        // Usamos el ID correcto según el XML - layout_alumno
+        layoutAlumnos = view.findViewById(R.id.layout_alumno);
         txtFecha = view.findViewById(R.id.txt_fecha_asistencia);
         Button btnAnterior = view.findViewById(R.id.btn_fecha_anterior);
         Button btnSiguiente = view.findViewById(R.id.btn_fecha_siguiente);

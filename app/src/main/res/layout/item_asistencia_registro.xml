@@ -1,24 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:orientation="horizontal"
-    android:background="#f0f0f0"
-    android:layout_marginBottom="8dp">
+    android:layout_marginVertical="@dimen/spacing_sm"
+    android:layout_marginHorizontal="@dimen/spacing_md"
+    app:cardCornerRadius="@dimen/corner_md"
+    app:cardElevation="@dimen/elevation_card">
 
-    <TextView
-        android:id="@+id/txt_fecha_asistencia"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:text="📅 2024-05-05"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"/>
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_md"
+        android:background="@color/white">
 
-    <TextView
-        android:id="@+id/txt_estado_asistencia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="✅"
-        android:textSize="16sp"/>
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_fecha_asistencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📅 2024-05-05"
+                android:textAppearance="@style/TextAppearance.App.Body"
+                android:drawableStart="@drawable/ic_usuario"
+                android:drawablePadding="@dimen/spacing_sm"/>
+
+            <TextView
+                android:id="@+id/txt_clase_asistencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clase: Judo Infantil"
+                android:textAppearance="@style/TextAppearance.App.Caption"
+                android:layout_marginTop="@dimen/spacing_xs"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_estado_asistencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✅"
+            android:background="@drawable/bg_estado_asistencia"
+            android:paddingHorizontal="@dimen/spacing_md"
+            android:paddingVertical="@dimen/spacing_sm"
+            android:textSize="@dimen/text_body"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

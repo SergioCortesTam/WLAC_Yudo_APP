@@ -1,26 +1,28 @@
 package com.example.wlac_yudo_app;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnHistoria, btnHorarios, btnProductos;
-    private ImageButton btnLoginIcono;
-    private ImageButton btnInstagram, btnWhatsapp, btnYoutube, btnFacebook, btnX;
+    private TabLayout tabLayout;
+    private BottomNavigationView socialBar;
+    private MaterialButton btnLoginIcono;  // Cambiado a MaterialButton
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREFS = "app_prefs";
     private static final String KEY_SESSION = "session_activa";
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,33 +40,54 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
 
-        // Botones top
-        btnHistoria   = findViewById(R.id.btn_historia);
-        btnHorarios   = findViewById(R.id.btn_horarios);
-        btnProductos  = findViewById(R.id.btn_productos);
+        tabLayout = findViewById(R.id.tab_layout);
+        socialBar = findViewById(R.id.social_bar);
         btnLoginIcono = findViewById(R.id.btn_login_icono);
 
-        // Botones redes
-        btnInstagram = findViewById(R.id.btn_instagram);
-        btnWhatsapp  = findViewById(R.id.btn_whatsapp);
-        btnYoutube   = findViewById(R.id.btn_youtube);
-        btnFacebook  = findViewById(R.id.btn_facebook);
-        btnX         = findViewById(R.id.btn_x);
-
-        // Fragmento inicial
+        // Cargar fragmento inicial
         cargarFragmento(new HistoriaFragment());
 
-        // Listeners
-        btnHistoria.setOnClickListener(v -> cargarFragmento(new HistoriaFragment()));
-        btnHorarios.setOnClickListener(v -> cargarFragmento(new HorariosFragment()));
-        btnProductos.setOnClickListener(v -> cargarFragmento(new ProductosFragment()));
+        // Tabs: Historia, Horarios, Productos
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        cargarFragmento(new HistoriaFragment());
+                        break;
+                    case 1:
+                        cargarFragmento(new HorariosFragment());
+                        break;
+                    case 2:
+                        cargarFragmento(new ProductosFragment());
+                        break;
+                }
+            }
 
-        btnInstagram.setOnClickListener(v -> abrirEnlace("https://www.instagram.com/wlacyudo/#"));
-        btnWhatsapp .setOnClickListener(v -> abrirEnlace("https://wa.me/123456789"));
-        btnYoutube  .setOnClickListener(v -> abrirEnlace("https://www.youtube.com/channel/UCkLErE2yakUmCuhfEaeuFAg"));
-        btnFacebook .setOnClickListener(v -> abrirEnlace("https://www.facebook.com"));
-        btnX        .setOnClickListener(v -> abrirEnlace("https://twitter.com"));
+            @Override public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override public void onTabReselected(TabLayout.Tab tab) {}
+        });
 
+        // Redes sociales
+        socialBar.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.menu_instagram) {
+                abrirEnlace("https://www.instagram.com/wlacyudo/#");
+            } else if (id == R.id.menu_whatsapp) {
+                abrirEnlace("https://wa.me/123456789");
+            } else if (id == R.id.menu_youtube) {
+                abrirEnlace("https://www.youtube.com/channel/UCkLErE2yakUmCuhfEaeuFAg");
+            } else if (id == R.id.menu_facebook) {
+                abrirEnlace("https://www.facebook.com");
+            } else if (id == R.id.menu_x) {
+                abrirEnlace("https://twitter.com");
+            }
+
+            return true;
+        });
+
+        // Login / Perfil
         btnLoginIcono.setOnClickListener(v -> {
             boolean logueado = mAuth.getCurrentUser() != null;
             boolean sessionActiva = prefs.getBoolean(KEY_SESSION, false);
@@ -86,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         boolean logueado = mAuth.getCurrentUser() != null;
         boolean sessionActiva = prefs.getBoolean(KEY_SESSION, false);
 
-        btnLoginIcono.setImageResource(
+        btnLoginIcono.setIconResource(  // Cambiado de setImageResource a setIconResource
                 (logueado && sessionActiva)
                         ? R.drawable.ic_usuario_desbloqueado
                         : R.drawable.ic_usuario_bloqueado
@@ -94,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void mostrarMenuSesion(View anchor) {
-        PopupMenu menu = new PopupMenu(this, anchor);
+        androidx.appcompat.widget.PopupMenu menu = new androidx.appcompat.widget.PopupMenu(this, anchor);
         menu.getMenuInflater().inflate(R.menu.menu_sesion, menu.getMenu());
         menu.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
@@ -113,9 +137,9 @@ public class MainActivity extends AppCompatActivity {
         menu.show();
     }
 
-    private void cargarFragmento(Fragment f) {
+    private void cargarFragmento(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_content, f);
+        ft.replace(R.id.main_content, fragment);
         ft.addToBackStack(null);
         ft.commit();
     }
@@ -124,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
-    // ✅ NUEVO: Detectar rol real desde Firestore
     private void mostrarPerfilSegunRol() {
         String email = mAuth.getCurrentUser() != null ?
                 mAuth.getCurrentUser().getEmail() : null;
@@ -149,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(e -> {
-                    // Podrías mostrar un Toast de error aquí si quieres
+                    // Aquí puedes mostrar un mensaje de error si quieres
                 });
     }
 }

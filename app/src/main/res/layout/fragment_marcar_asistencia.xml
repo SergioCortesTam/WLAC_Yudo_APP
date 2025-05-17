@@ -42,10 +42,10 @@
         android:layout_marginTop="16dp">
 
         <LinearLayout
-            android:id="@+id/layout_alumnos"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:id="@+id/layout_alumno"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     </ScrollView>
 
     <!-- Botón para guardar todas las asistencias -->

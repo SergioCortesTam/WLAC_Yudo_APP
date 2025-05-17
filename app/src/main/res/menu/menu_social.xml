@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_x"
+        android:icon="@drawable/ic_x"
+        android:title="X" />
+    <item
+        android:id="@+id/menu_whatsapp"
+        android:icon="@drawable/ic_whatsapp"
+        android:title="WhatsApp" />
+    <item
+        android:id="@+id/menu_youtube"
+        android:icon="@drawable/ic_youtube"
+        android:title="YouTube" />
+    <item
+        android:id="@+id/menu_instagram"
+        android:icon="@drawable/ic_instagram"
+        android:title="Instagram" />
+    <item
+        android:id="@+id/menu_facebook"
+        android:icon="@drawable/ic_facebook"
+        android:title="Facebook" />
+</menu>

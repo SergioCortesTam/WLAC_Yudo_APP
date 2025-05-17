@@ -18,8 +18,9 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
+        <!-- Asignamos un ID simple y único -->
         <LinearLayout
-            android:id="@+id/layout_lista_asistencias"
+            android:id="@+id/layoutAsistencias"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

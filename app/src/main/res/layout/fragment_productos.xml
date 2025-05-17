@@ -1,75 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_productos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
-        <TextView
-            android:id="@+id/txt_titulo_productos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Productos Disponibles"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#F44336"
-            android:layout_marginBottom="12dp" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_productos"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Productos">
 
-        <!-- GridLayout o algo similar para los productos -->
-        <GridLayout
+            <TextView
+                android:id="@+id/txt_titulo_productos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Productos Disponibles"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Filtros y búsqueda -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_filtros"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp">
 
-            <!-- Ejemplo de producto -->
-            <LinearLayout
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_todos"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:checked="true"
+                android:text="Todos" />
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_youtube"
-                    android:contentDescription="Producto 1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Producto 1"
-                    android:textSize="14sp"
-                    android:textColor="#333333" />
-            </LinearLayout>
-
-            <!-- Repite para más productos -->
-            <LinearLayout
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_equipamiento"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:text="Equipamiento" />
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_youtube"
-                    android:contentDescription="Producto 2" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_uniformes"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Uniformes" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Producto 2"
-                    android:textSize="14sp"
-                    android:textColor="#333333" />
-            </LinearLayout>
+        </com.google.android.material.chip.ChipGroup>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        </GridLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    </LinearLayout>
-</ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_productos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="8dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_producto" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- FAB para carrito de compras -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_carrito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="Carrito de compras"
+        app:srcCompat="@drawable/ic_shopping_cart" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

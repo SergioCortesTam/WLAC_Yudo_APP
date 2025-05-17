@@ -6,24 +6,25 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 import androidx.annotation.*;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.*;
 
 import java.util.*;
 
 public class ProfesorFragment extends Fragment {
 
-    private Button btnGestionarCinturones, btnVerClases, btnMarcarAsistencia;
+    private MaterialCardView cardGestionarCinturones, cardVerClases, cardMarcarAsistencia;
     private FirebaseFirestore db;
     private List<String> alumnoIds, alumnoNombres;
 
-    public ProfesorFragment() {
-        // Constructor vacío obligatorio
-    }
+    public ProfesorFragment() {}
 
-    @Nullable @Override
+    @Nullable
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -31,11 +32,12 @@ public class ProfesorFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
-        btnGestionarCinturones = view.findViewById(R.id.btn_gestionar_cinturones);
-        btnVerClases           = view.findViewById(R.id.btn_ver_clases);
-        btnMarcarAsistencia    = view.findViewById(R.id.btn_marcar_asistencia);
+        // Nueva vinculación con las tarjetas del layout
+        cardGestionarCinturones = view.findViewById(R.id.card_gestionar_cinturones);
+        cardVerClases           = view.findViewById(R.id.card_ver_clases);
+        cardMarcarAsistencia    = view.findViewById(R.id.card_marcar_asistencia);
 
-        // Carga lista de alumnos una sola vez
+        // Cargar alumnos
         alumnoIds = new ArrayList<>();
         alumnoNombres = new ArrayList<>();
         db.collection("users")
@@ -48,14 +50,15 @@ public class ProfesorFragment extends Fragment {
                     }
                 });
 
-        btnGestionarCinturones.setOnClickListener(v -> mostrarDialogCinturones());
-        btnVerClases         .setOnClickListener(v -> mostrarDialogClases());
-        btnMarcarAsistencia  .setOnClickListener(v ->
-                replaceFragment(new MarcarAsistenciaFragment())
-        );
+        // Listeners para cada tarjeta
+        cardGestionarCinturones.setOnClickListener(v -> mostrarDialogCinturones());
+        cardVerClases         .setOnClickListener(v -> mostrarDialogClases());
+        cardMarcarAsistencia  .setOnClickListener(v -> replaceFragment(new MarcarAsistenciaFragment()));
 
         return view;
     }
+
+
 
     /** Muestra un AlertDialog con Spinner para seleccionar alumno y cinturón */
     private void mostrarDialogCinturones() {
