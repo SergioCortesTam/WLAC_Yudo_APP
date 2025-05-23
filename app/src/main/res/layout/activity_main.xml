@@ -26,29 +26,40 @@
 
                 <ImageView
                     android:id="@+id/img_logo"
-                    android:layout_width="@dimen/icon_medium"  android:layout_height="@dimen/icon_medium" android:contentDescription="Logo WLAC"
-                    android:src="@drawable/ic_wlac" android:layout_marginEnd="@dimen/spacing_md" /> <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="WLAC Judo"
-                android:textAppearance="@style/TextAppearance.App.Title" android:textColor="@color/text_white" /> <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_login_icono"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_white"
-                app:iconTint="@color/text_white"
-                app:strokeColor="@color/text_white"
-                app:icon="@drawable/ic_usuario_bloqueado" /> </LinearLayout>
+                    android:layout_width="@dimen/icon_medium"
+                    android:layout_height="@dimen/icon_medium"
+                    android:contentDescription="Logo WLAC"
+                    android:src="@drawable/ic_wlac"
+                    android:layout_marginEnd="@dimen/spacing_md" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="WLAC Judo"
+                    android:textAppearance="@style/TextAppearance.App.Title"
+                    android:textColor="@color/text_white" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_login_icono"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_white"
+                    app:iconTint="@color/text_white"
+                    app:strokeColor="@color/text_white"
+                    app:icon="@drawable/ic_usuario_bloqueado" />
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/primary_light" app:tabSelectedTextColor="@color/text_white"
-            app:tabIndicatorColor="@color/accent" app:tabGravity="fill"
+            app:tabTextColor="@color/primary_light"
+            app:tabSelectedTextColor="@color/primary_dark"
+            app:tabIndicatorColor="@color/accent"
+            app:tabGravity="fill"
             app:tabMode="fixed">
 
             <com.google.android.material.tabs.TabItem
@@ -72,10 +83,18 @@
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" /> <com.google.android.material.bottomnavigation.BottomNavigationView
-    android:id="@+id/social_bar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:background="@color/white" app:elevation="@dimen/elevation_appbar" app:itemIconTint="@color/primary" app:labelVisibilityMode="unlabeled"
-    app:menu="@menu/menu_social" /> </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:layout_marginBottom="56dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/social_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        app:elevation="@dimen/elevation_appbar"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/menu_social" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

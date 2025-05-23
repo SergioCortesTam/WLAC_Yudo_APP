@@ -5,69 +5,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp">
+    android:layout_margin="8dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="12dp">
 
         <ImageView
             android:id="@+id/img_producto"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Imagen del producto"
-            tools:src="@drawable/ic_youtube" />
+            tools:srcCompat="@tools:sample/avatars" /> <TextView
+        android:id="@+id/txt_nombre_producto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:textStyle="bold"
+        tools:text="Nombre del Producto"
+        android:maxLines="2"
+        android:ellipsize="end"/>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txt_categoria_producto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="?attr/textAppearanceCaption"
+            tools:text="Categoría"
+            android:background="@drawable/chip_background_simple"  /> <TextView
+        android:id="@+id/txt_precio_producto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?attr/textAppearanceBody2"
+        android:textColor="?attr/colorPrimary"
+        android:textStyle="bold"
+        tools:text="€29.99" />
+
+        <TextView
+            android:id="@+id/txt_descripcion_producto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp">
-
-            <TextView
-                android:id="@+id/txt_nombre_producto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                tools:text="Nombre del Producto" />
-
-            <TextView
-                android:id="@+id/txt_precio_producto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                tools:text="$99.99" />
-
-            <TextView
-                android:id="@+id/txt_descripcion_producto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textSize="14sp"
-                tools:text="Descripción corta del producto" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_agregar_carrito"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Añadir"
-                android:textAllCaps="false"
-                app:icon="@drawable/ic_add_shopping_cart" />
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_marginTop="4dp"
+            android:textAppearance="?attr/textAppearanceBody2"
+            tools:text="Una breve descripción del producto."
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:visibility="gone"/> </LinearLayout>
+    <Button
+        android:id="@+id/btn_anadir_carrito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Añadir al Carrito"
+        android:textSize="12sp"
+        android:layout_marginTop="8dp"/>
 </com.google.android.material.card.MaterialCardView>

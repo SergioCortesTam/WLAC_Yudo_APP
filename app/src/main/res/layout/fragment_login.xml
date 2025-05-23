@@ -1,162 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="@color/secondary"
     android:padding="@dimen/spacing_xl">
 
-    <!-- Logo container with animation support -->
-    <LinearLayout
-        android:id="@+id/container_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/card_login"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_bias="0.2">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/logo_app"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/ic_wlac"
-            android:contentDescription="Logo de WLAC Judo"
-            app:shapeAppearanceOverlay="@style/CircleImageView"
-            android:elevation="@dimen/elevation_fab"
-            android:layout_marginBottom="@dimen/spacing_md" />
-
-        <TextView
+        <!-- Logo container with animation support -->
+        <LinearLayout
+            android:id="@+id/container_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="WLAC Judo"
-            android:textAppearance="@style/TextAppearance.App.Title"
-            android:textColor="@color/primary" />
-    </LinearLayout>
-
-    <!-- Login card with material design -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/corner_lg"
-        app:cardElevation="@dimen/elevation_card"
-        app:layout_constraintTop_toBottomOf="@id/container_logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/container_footer"
-        android:layout_marginTop="@dimen/spacing_xl">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/spacing_lg">
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/card_login"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_bias="0.2">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/logo_app"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_wlac"
+                android:contentDescription="Logo de WLAC Judo"
+                app:shapeAppearanceOverlay="@style/CircleImageView"
+                android:elevation="@dimen/elevation_fab"
+                android:layout_marginBottom="@dimen/spacing_md" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Iniciar sesión"
-                android:textAppearance="@style/TextAppearance.App.Headline"
-                android:textColor="@color/primary"
-                android:layout_marginBottom="@dimen/spacing_lg" />
+                android:text="WLAC Judo"
+                android:textAppearance="@style/TextAppearance.App.Title"
+                android:textColor="@color/primary" />
+        </LinearLayout>
 
-            <!-- Username field with material design -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_usuario"
+        <!-- Login card with material design -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/elevation_card"
+            app:layout_constraintTop_toBottomOf="@id/container_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/container_footer"
+            android:layout_marginTop="@dimen/spacing_xl">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Usuario"
-                app:startIconDrawable="@drawable/ic_usuario"
-                app:startIconTint="@color/primary"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="@dimen/spacing_md">
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/campo_usuario"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Password field with material design -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_contrasena"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Contraseña"
-                app:startIconDrawable="@drawable/ic_contrasena"
-                app:startIconTint="@color/primary"
-                app:endIconMode="password_toggle"
-                app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="@dimen/spacing_lg">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/campo_contrasena"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Login button with material design -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/boton_iniciar_sesion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Iniciar sesión"
-                android:textSize="16sp"
-                android:paddingVertical="@dimen/spacing_md"
-                app:cornerRadius="@dimen/corner_md"
-                android:layout_marginBottom="@dimen/spacing_md" />
-
-            <!-- Loading indicator -->
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm">
-
-                <com.google.android.material.progressindicator.CircularProgressIndicator
-                    android:id="@+id/barra_progreso"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    app:indicatorColor="@color/accent"
-                    app:trackThickness="2dp" />
-            </FrameLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                    android:text="Iniciar sesión"
+                    android:textAppearance="@style/TextAppearance.App.Headline"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_lg" />
 
-    <!-- Footer for additional options -->
-    <LinearLayout
-        android:id="@+id/container_footer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/card_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="@dimen/spacing_md">
+                <!-- Username field with material design -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Usuario"
+                    app:startIconDrawable="@drawable/ic_usuario"
+                    app:startIconTint="@color/primary"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="@dimen/spacing_md">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/olvido_contrasena"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/campo_usuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password field with material design -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_contrasena"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contraseña"
+                    app:startIconDrawable="@drawable/ic_contrasena"
+                    app:startIconTint="@color/primary"
+                    app:endIconMode="password_toggle"
+                    app:errorEnabled="true"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="@dimen/spacing_lg">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/campo_contrasena"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Login button with material design -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/boton_iniciar_sesion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Iniciar sesión"
+                    android:textSize="16sp"
+                    android:paddingVertical="@dimen/spacing_md"
+                    app:cornerRadius="@dimen/corner_md"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <!-- Loading indicator -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/barra_progreso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        app:indicatorColor="@color/accent"
+                        app:trackThickness="2dp" />
+                </FrameLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Footer for additional options -->
+        <LinearLayout
+            android:id="@+id/container_footer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¿Olvidaste tu contraseña?"
-            android:textColor="@color/primary"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/card_login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/spacing_md">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/olvido_contrasena"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Olvidaste tu contraseña?"
+                android:textColor="@color/primary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

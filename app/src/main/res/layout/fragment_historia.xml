@@ -218,10 +218,72 @@
                     android:layout_height="wrap_content"
                     android:text="Contáctanos"
                     android:textColor="@color/primary"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:backgroundTint="@color/text_white"
-                    app:icon="@drawable/ic_whatsapp"
-                    app:iconTint="@color/primary" />
+                    app:icon="@drawable/ic_email"
+                    app:iconTint="@color/primary"
+                    app:rippleColor="@color/primary_light" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <!-- Mapa interactivo -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/elevation_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Visítanos"
+                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+                    <!-- Puedes reemplazar esta imagen por un mapa real si integras un MapView -->
+                    <ImageView
+                        android:id="@+id/img_mapa"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/mapa_ubicacion"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:contentDescription="Haz clic para abrir la ubicación en el mapa" />
+
+                    <!-- Marcador para indicar la ubicación exacta -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_location_marker"
+                        android:contentDescription="Marcador de ubicación" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:text="Avenida De Juan Carlos I S/N, Parla, Madrid, 28981"
+                    android:textAppearance="@style/TextAppearance.App.Body"
+                    android:gravity="center" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
+
 </androidx.core.widget.NestedScrollView>

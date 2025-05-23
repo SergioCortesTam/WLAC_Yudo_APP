@@ -79,6 +79,18 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <!-- FAB para agregar producto (solo profesores) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_agregar_producto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:contentDescription="Agregar producto"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_add"
+        app:backgroundTint="@color/black" />
+
     <!-- FAB para carrito de compras -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_carrito"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme -->
+
+    <!-- Tema base de la aplicación -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
@@ -20,7 +21,7 @@
         <item name="fontFamily">sans-serif-light</item>
     </style>
 
-    <!-- Texto -->
+    <!-- Apariencias de texto -->
     <style name="TextAppearance.App.Display" parent="TextAppearance.MaterialComponents.Headline2">
         <item name="fontFamily">sans-serif-bold</item>
         <item name="android:textSize">@dimen/text_display</item>
@@ -106,7 +107,8 @@
         <item name="boxCornerRadiusTopStart">@dimen/corner_sm</item>
     </style>
 
-    <style name="CircleImageView" parent="">
+    <!-- Imagen redonda -->
+    <style name="CircleImageView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
