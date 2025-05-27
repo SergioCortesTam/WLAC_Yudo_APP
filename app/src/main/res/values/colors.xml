@@ -12,7 +12,7 @@
     <color name="colorPrimary">#2E51A2</color>
     <color name="colorPrimaryDark">#1C3771</color>
     <color name="colorPrimaryLight">#A6C0FF</color>
-    <color name="colorAccent">#FF5722</color>
+    <color name="colorAccent">#FF3D00</color>
 
     <!-- Secundarios -->
     <color name="secondary">#F0F4FF</color>           <!-- Azul muy suave -->
@@ -51,5 +51,7 @@
     <!-- Toolbar -->
     <color name="toolbar_background_light">#FAFAFA</color>
     <color name="toolbar_text_light">#424242</color>
+
+
 
 </resources>

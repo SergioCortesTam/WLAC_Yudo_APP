@@ -86,33 +86,27 @@ public class HistoriaFragment extends Fragment {
 
     private void abrirMapa() {
         try {
-            // Abre la ubicación real en Google Maps
-            Uri gmmIntentUri = Uri.parse("geo:" + LATITUDE + "," + LONGITUDE + "?q=" + Uri.encode(LOCATION_NAME));
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");
+            // Coordenadas y nombre del lugar
+            String nombreLugar = "CDE Wlac Yudo";
+            double latitud = 40.2282276;
+            double longitud = -3.7698975;
 
-            if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
-                startActivity(mapIntent);
-            } else {
-                // Si Google Maps no está disponible, intenta con el navegador
-                Uri webUri = Uri.parse("https://www.google.com/maps/search/?api=1&query="
-                        + Uri.encode(LOCATION_NAME)
-                        + "&ll=" + LATITUDE + "," + LONGITUDE);
-                Intent webIntent = new Intent(Intent.ACTION_VIEW, webUri);
+            // Construcción de la URI geo
+            Uri locationUri = Uri.parse("geo:0,0?q=" + Uri.encode(nombreLugar + "@" + latitud + "," + longitud));
+            Intent intent = new Intent(Intent.ACTION_VIEW, locationUri);
+            intent.setPackage("com.google.android.apps.maps"); // Prioriza Google Maps si está disponible
 
-                if (webIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
-                    startActivity(webIntent);
-                } else {
-                    Toast.makeText(requireContext(),
-                            "No se encontró ninguna aplicación de mapas",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
+            // Inicia el intent
+            startActivity(intent);
+            Log.d("Mapa", "Intent lanzado para abrir ubicación: " + nombreLugar);
         } catch (Exception e) {
-            Log.e(TAG, "Error al abrir el mapa", e);
+            Log.e("Mapa", "Error al abrir el mapa", e);
             Toast.makeText(requireContext(),
-                    "No se pudo abrir el mapa",
+                    "No se pudo abrir el mapa. Asegúrate de tener Google Maps instalado.",
                     Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 }
