@@ -33,10 +33,8 @@ android {
 }
 
 dependencies {
-    // Your existing dependencies
-    implementation(libs.material) // Make sure this is only listed once
+    implementation(libs.material) // Asegúrate de que esté solo una vez
     implementation(libs.appcompat)
-    // implementation(libs.material) // Remove this duplicate
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
@@ -46,8 +44,8 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    // Add these for Glide
-    implementation("androidx.core:core-ktx:1.7.0") // Paréntesis y comillas dobles
+    // Dependencias para Glide
+    implementation("androidx.core:core-ktx:1.7.0")
     annotationProcessor("com.google.dagger:dagger-compiler:2.40.5")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
