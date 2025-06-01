@@ -197,7 +197,7 @@
                     android:id="@+id/tv_progress_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="65% completado para el siguiente cinturón"
+                    android:text="65% completado para siguiente cinturón"
                     android:textAppearance="@style/TextAppearance.App.Caption"
                     android:gravity="end" />
             </LinearLayout>
