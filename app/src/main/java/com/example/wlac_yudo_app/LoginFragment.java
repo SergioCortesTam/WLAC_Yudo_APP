@@ -40,6 +40,9 @@ public class LoginFragment extends Fragment {
         edtUsuario       = view.findViewById(R.id.campo_usuario);
         edtContrasena    = view.findViewById(R.id.campo_contrasena);
         btnIniciarSesion = view.findViewById(R.id.boton_iniciar_sesion);
+        Button btnOlvidoContrasena = view.findViewById(R.id.olvido_contrasena);
+        btnOlvidoContrasena.setOnClickListener(v -> mostrarDialogoRecuperarContrasena());
+
 
         mAuth = FirebaseAuth.getInstance();
         db    = FirebaseFirestore.getInstance();
@@ -108,4 +111,35 @@ public class LoginFragment extends Fragment {
                         "Error al consultar rol: " + e.getMessage(),
                         Toast.LENGTH_LONG).show());
     }
+    private void mostrarDialogoRecuperarContrasena() {
+        // Crear un EditText dinámico
+        final EditText inputCorreo = new EditText(getContext());
+        inputCorreo.setHint("Correo registrado");
+        inputCorreo.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        inputCorreo.setPadding(40, 30, 40, 30);
+
+        new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Recuperar contraseña")
+                .setMessage("Ingresa tu correo electrónico para recibir un enlace de recuperación.")
+                .setView(inputCorreo)
+                .setPositiveButton("Enviar", (dialog, which) -> {
+                    String correo = inputCorreo.getText().toString().trim();
+                    if (!TextUtils.isEmpty(correo)) {
+                        FirebaseAuth.getInstance()
+                                .sendPasswordResetEmail(correo)
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getContext(), "Correo enviado con instrucciones", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(getContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                    } else {
+                        Toast.makeText(getContext(), "Ingresa un correo válido", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
 }
