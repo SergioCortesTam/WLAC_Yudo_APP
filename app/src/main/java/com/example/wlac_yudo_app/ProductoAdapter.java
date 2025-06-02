@@ -44,13 +44,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         if (producto.getImageUrl() != null && !producto.getImageUrl().isEmpty()) {
             Glide.with(context)
                     .load(producto.getImageUrl())
-                    .placeholder(R.drawable.ic_add) // USA UN PLACEHOLDER ADECUADO
-                    .error(R.drawable.ic_add)           // USA UN DRAWABLE DE ERROR ADECUADO
+                    .placeholder(R.drawable.ic_noimagen) // placeholder mientras carga
+                    .error(R.drawable.ic_noimagen)       // imagen si falla
                     .into(holder.imgProducto);
         } else {
-            // Set a default image if no URL
-            Glide.with(context).load(R.drawable.ic_add).into(holder.imgProducto); // USA UN PLACEHOLDER ADECUADO
+            Glide.with(context)
+                    .load(R.drawable.ic_noimagen)
+                    .into(holder.imgProducto);
         }
+
 
         holder.itemView.setOnClickListener(v -> {
             // Example: Show description in a Toast or navigate to a detail screen

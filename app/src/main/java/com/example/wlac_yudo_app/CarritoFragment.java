@@ -15,6 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -26,10 +30,10 @@ public class CarritoFragment extends Fragment implements CarritoAdapter.OnCartUp
     private List<CartManager.CartItem> itemsDelCarrito;
     private TextView tvTotalCarrito, tvCarritoVacio;
     private Button btnSolicitarProductos;
-    private final String TU_DIRECCION_DE_CORREO = "tuemail@example.com"; // Reemplaza con tu email real
+    private final String TU_DIRECCION_DE_CORREO = "o0osergio0o@gmail.com";
 
     public CarritoFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -71,10 +75,10 @@ public class CarritoFragment extends Fragment implements CarritoAdapter.OnCartUp
         emailBody.append(String.format(Locale.getDefault(), "\nTotal del pedido: €%.2f", CartManager.getInstance().getTotalPrice()));
         emailBody.append("\n\nPor favor, preparar este pedido si los artículos están disponibles.");
         // Aquí podrías añadir información del usuario si está logueado y quieres incluirla.
-        // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        // if (user != null && user.getEmail() != null) {
-        //     emailBody.append("\n\nSolicitado por: ").append(user.getEmail());
-        // }
+         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+         if (user != null && user.getEmail() != null) {
+             emailBody.append("\n\nSolicitado por: ").append(user.getEmail());
+         }
 
 
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);

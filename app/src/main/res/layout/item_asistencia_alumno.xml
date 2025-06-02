@@ -1,77 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginVertical="4dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="@color/colorOutline">
+    android:layout_height="56dp"
+    android:orientation="horizontal"
+    android:paddingHorizontal="12dp"
+    android:gravity="center_vertical"
+    android:background="?attr/selectableItemBackground">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Avatar con iniciales, pequeño y circular -->
+    <TextView
+        android:id="@+id/txt_avatar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_usuario"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="12dp"
+        android:includeFontPadding="false" />
+
+    <!-- Info nombre, ocupa espacio restante -->
+    <TextView
+        android:id="@+id/txt_nombre_alumno"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
+        android:layout_weight="1"
+        android:text="Nombre Alumno"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end" />
 
-        <!-- Avatar placeholder -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/colorPrimary"
-            android:layout_marginEnd="12dp">
-
-            <TextView
-                android:id="@+id/txt_avatar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textSize="16sp" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Info del alumno -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt_nombre_alumno"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nombre del Alumno"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorOnSurface" />
-
-            <TextView
-                android:id="@+id/txt_email_alumno"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="email@ejemplo.com"
-                android:textSize="12sp"
-                android:textColor="@color/colorOnSurfaceVariant"
-                android:layout_marginTop="2dp" />
-
-        </LinearLayout>
-
-        <!-- Checkbox de asistencia -->
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/chk_asistio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Presente"
-            android:textSize="14sp"
-            android:layout_marginStart="8dp" />
-
-    </LinearLayout>
-
-</com.google.android.material.card.MaterialCardView>
+    <!-- Checkbox para marcar asistencia -->
+    <CheckBox
+        android:id="@+id/chk_asistio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="" />
+</LinearLayout>

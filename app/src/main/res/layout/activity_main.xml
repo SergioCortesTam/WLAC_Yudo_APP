@@ -94,6 +94,7 @@
         android:background="@color/white"
         app:elevation="@dimen/elevation_appbar"
         app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@null"
         app:menu="@menu/menu_social" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

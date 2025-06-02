@@ -51,12 +51,11 @@ public class ProductosFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         recyclerProductos = view.findViewById(R.id.recycler_productos);
-        chipGroupFiltros = view.findViewById(R.id.chip_group_filtros);
+
         fabAgregarProducto = view.findViewById(R.id.fab_agregar_producto);
         fabCarrito = view.findViewById(R.id.fab_carrito);
 
         setupRecyclerView();
-        setupChipGroupListener();
         checkUserRoleForFAB();
         loadProductos(currentCategoryFilter);
 
@@ -64,35 +63,20 @@ public class ProductosFragment extends Fragment {
             Toast.makeText(getContext(), "Funcionalidad de añadir desde aquí no implementada (usar menú Profesor).", Toast.LENGTH_LONG).show();
         });
 
-        // --- INICIO DE CAMBIO: Navegación al CarritoFragment ---
         fabCarrito.setOnClickListener(v -> {
-            // Toast.makeText(getContext(), "Abrir carrito de compras.", Toast.LENGTH_SHORT).show(); // Opcional, puedes quitarlo
             replaceFragment(new CarritoFragment());
         });
-        // --- FIN DE CAMBIO ---
 
         return view;
     }
 
     private void setupRecyclerView() {
         listaProductos = new ArrayList<>();
-        // Asegúrate que el contexto no sea nulo. requireContext() es más seguro aquí si el fragment está adjunto.
         productoAdapter = new ProductoAdapter(requireContext(), listaProductos);
         recyclerProductos.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerProductos.setAdapter(productoAdapter);
     }
 
-    private void setupChipGroupListener() {
-        chipGroupFiltros.setOnCheckedChangeListener((group, checkedId) -> {
-            Chip selectedChip = group.findViewById(checkedId);
-            if (selectedChip != null) {
-                currentCategoryFilter = selectedChip.getText().toString();
-            } else {
-                currentCategoryFilter = "Todos";
-            }
-            loadProductos(currentCategoryFilter);
-        });
-    }
 
 
     private void checkUserRoleForFAB() {
@@ -100,7 +84,7 @@ public class ProductosFragment extends Fragment {
         if (currentUser != null) {
             db.collection("users").document(currentUser.getUid()).get()
                     .addOnSuccessListener(documentSnapshot -> {
-                        if (getActivity() == null || !isAdded()) { // Prevenir crash si el fragment no está adjunto
+                        if (getActivity() == null || !isAdded()) {
                             return;
                         }
                         if (documentSnapshot.exists()) {
@@ -129,17 +113,19 @@ public class ProductosFragment extends Fragment {
         }
     }
 
-
     private void loadProductos(String categoria) {
         Log.d(TAG, "Cargando productos para la categoría: " + categoria);
         Query query = db.collection("productos").orderBy("timestamp", Query.Direction.DESCENDING);
 
         if (!"Todos".equalsIgnoreCase(categoria) && categoria != null) {
-            query = query.whereEqualTo("categoria", categoria);
+            String filtroReal = mapChipToCategoria(categoria);
+            if (filtroReal != null) {
+                query = query.whereEqualTo("categoria", filtroReal);
+            }
         }
 
         query.get().addOnCompleteListener(task -> {
-            if (getActivity() == null || !isAdded()) { // Prevenir crash
+            if (getActivity() == null || !isAdded()) {
                 return;
             }
             if (task.isSuccessful()) {
@@ -151,26 +137,39 @@ public class ProductosFragment extends Fragment {
                         listaProductos.add(producto);
                     }
                 }
-                productoAdapter.notifyDataSetChanged(); // Se puede optimizar con notifyItemRangeInserted etc.
+                productoAdapter.notifyDataSetChanged();
                 Log.d(TAG, "Productos cargados: " + listaProductos.size());
-                if(listaProductos.isEmpty() && getContext() != null){ // getContext() para el Toast
+                if (listaProductos.isEmpty() && getContext() != null) {
                     Toast.makeText(getContext(), "No hay productos en esta categoría.", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Log.w(TAG, "Error al cargar productos.", task.getException());
-                if(getContext() != null){
+                if (getContext() != null) {
                     Toast.makeText(getContext(), "Error al cargar productos.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
+    // Mapear el texto visible en los chips al valor real de 'categoria' en Firestore
+    private String mapChipToCategoria(String chipText) {
+        switch (chipText) {
+            case "Clases de Judogis":
+                return "judogi"; // Ajusta este valor según lo que tengas en Firestore
+            case "Merchandising":
+                return "merchandising"; // Ajusta según Firestore
+            case "Otros":
+                return "otros"; // Ajusta según Firestore
+            default:
+                return null; // Para "Todos" o cualquier otro caso no filtrar
+        }
+    }
+
     private void replaceFragment(Fragment fragment) {
-        if (getActivity() == null || !isAdded()) { // Comprobación adicional
+        if (getActivity() == null || !isAdded()) {
             return;
         }
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        // Asegúrate que R.id.main_content es el ID correcto de tu contenedor de Fragments en la Activity
         transaction.replace(R.id.main_content, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

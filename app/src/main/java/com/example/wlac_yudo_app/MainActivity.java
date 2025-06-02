@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BottomNavigationView nav = findViewById(R.id.social_bar);
+        nav.setItemIconTintList(null); // Esto asegura que NO se aplique tintado
+
+
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         prefs = getSharedPreferences(PREFS, MODE_PRIVATE);

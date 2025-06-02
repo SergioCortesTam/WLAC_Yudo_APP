@@ -70,7 +70,7 @@ public class MarcarAsistenciaFragment extends Fragment {
     private void actualizarFecha() {
         String fechaStr = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 .format(fechaActual.getTime());
-        txtFecha.setText("Fecha: " + fechaStr);
+        txtFecha.setText(fechaStr);
         cargarAlumnosYAsistencias(fechaStr);
     }
 

@@ -14,8 +14,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_productos"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Productos">
+            android:layout_height="?attr/actionBarSize">
 
             <TextView
                 android:id="@+id/txt_titulo_productos"
@@ -28,38 +27,7 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <!-- Filtros y búsqueda -->
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chip_group_filtros"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_todos"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Todos" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_equipamiento"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Equipamiento" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_uniformes"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Uniformes" />
-
-        </com.google.android.material.chip.ChipGroup>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
