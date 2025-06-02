@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal"
+    android:paddingHorizontal="12dp"
+    android:gravity="center_vertical"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- Avatar con iniciales, pequeño y circular -->
+    <TextView
+        android:id="@+id/txt_avatar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_usuario"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="12dp"
+        android:includeFontPadding="false" />
+
+    <!-- Info nombre, ocupa espacio restante -->
+    <TextView
+        android:id="@+id/txt_nombre_alumno"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nombre Alumno"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <!-- Checkbox para marcar asistencia -->
+    <CheckBox
+        android:id="@+id/chk_asistio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="" />
+</LinearLayout>

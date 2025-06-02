@@ -1,13 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#6200EE</color> <color name="colorPrimaryVariant">#3700B3</color> <color name="colorOnPrimary">@color/white</color>
+    <!-- Paleta principal -->
+    <color name="primary">#2E51A2</color>             <!-- Azul judo -->
+    <color name="primary_dark">#1C3771</color>        <!-- Azul oscuro -->
+    <color name="primary_light">#A6C0FF</color>       <!-- Azul claro -->
+    <color name="accent">#FF5722</color>              <!-- Naranja -->
+    <color name="accent_light">#FFAB91</color>        <!-- Naranja claro -->
 
-    <color name="toolbar_background_light">#FAFAFA</color> <color name="toolbar_text_light">#424242</color> <color name="bottom_nav_item_active_light">#212121</color> <color name="bottom_nav_item_inactive_light">#BDBDBD</color> </resources>
+    <!-- Nombres estándar para compatibilidad -->
+    <color name="colorPrimary">#2E51A2</color>
+    <color name="colorPrimaryDark">#1C3771</color>
+    <color name="colorPrimaryLight">#A6C0FF</color>
+    <color name="colorAccent">#FF3D00</color>
+
+    <!-- Secundarios -->
+    <color name="secondary">#F0F4FF</color>           <!-- Azul muy suave -->
+    <color name="secondary_light">#FFB74D</color>     <!-- Naranja claro -->
+
+    <!-- Fondo -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="background_light">#F5F5F5</color>
+
+    <!-- Texto -->
+    <color name="text_primary">#212121</color>        <!-- Casi negro -->
+    <color name="text_secondary">#757575</color>      <!-- Gris oscuro -->
+    <color name="text_hint">#BDBDBD</color>           <!-- Gris claro -->
+    <color name="text_white">#FFFFFF</color>
+
+    <!-- Estados -->
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FFC107</color>
+    <color name="error">#F44336</color>
+
+    <!-- Cinturones -->
+    <color name="cinturon_blanco">#FFFFFF</color>
+    <color name="cinturon_amarillo">#FDD835</color>
+    <color name="cinturon_naranja">#FF9800</color>
+    <color name="cinturon_verde">#4CAF50</color>
+    <color name="cinturon_azul">#2196F3</color>
+    <color name="cinturon_marron">#795548</color>
+    <color name="cinturon_negro">#212121</color>
+
+    <!-- Navegación -->
+    <color name="bottom_nav_item_active_light">#212121</color>
+    <color name="bottom_nav_item_inactive_light">#BDBDBD</color>
+    <color name="divider">#DDDDDD</color>
+
+    <!-- Toolbar -->
+    <color name="toolbar_background_light">#FAFAFA</color>
+    <color name="toolbar_text_light">#424242</color>
+
+    <color name="precio_claro">#100026FF</color> <!-- azul clarito -->
+
+        <!-- Colores principales -->
+        <color name="colorPrimary1">#1976D2</color>
+        <color name="colorPrimaryVariant">#0D47A1</color>
+        <color name="colorSecondary">#FFC107</color>
+        <color name="colorSecondaryVariant">#FF8F00</color>
+        <color name="colorAccent1">#4CAF50</color>
+    <color name="card_stroke">#E0E0E0</color>
+
+    <color name="colorOutline">#BDBDBD</color>
+    <color name="colorOnSurface">#212121</color>
+    <color name="colorOnSurfaceVariant">#757575</color>
+
+        <!-- Estados de asistencia -->
+        <color name="colorPresente">#4CAF50</color>
+        <color name="colorAusente">#F44336</color>
+        <color name="colorSinMarcar">#9E9E9E</color>
+        <color name="colorCambio">#FF9800</color>
+
+
+</resources>

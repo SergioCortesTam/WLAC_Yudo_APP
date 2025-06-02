@@ -1,7 +1,55 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.WLAC_Yudo_APP" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-    </style>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Paleta principal (modo oscuro suave) -->
+    <color name="primary">#2B478F</color>             <!-- Azul judo ligeramente más oscuro -->
+    <color name="primary_dark">#1B2F6A</color>        <!-- Azul profundo pero no negro -->
+    <color name="primary_light">#7D95C6</color>       <!-- Azul claro más sobrio -->
+    <color name="accent">#FF0000</color>              <!-- Naranja más cálido -->
+    <color name="accent_light">#FF0000</color>        <!-- Naranja claro menos saturado -->
+
+    <!-- Compatibilidad -->
+    <color name="colorPrimary">#2B478F</color>
+    <color name="colorPrimaryDark">#1B2F6A</color>
+    <color name="colorPrimaryLight">#7D95C6</color>
+    <color name="colorAccent">#FF0000</color>
+
+    <!-- Secundarios -->
+    <color name="secondary">#E8ECF5</color>           <!-- Azul grisáceo suave -->
+    <color name="secondary_light">#DDA65C</color>
+
+    <!-- Fondo -->
+    <color name="white">#1A1A1A</color>               <!-- Gris muy oscuro como fondo -->
+    <color name="black">#FAFAFA</color>               <!-- Gris claro para elementos sobre fondo oscuro -->
+    <color name="background_light">#2A2A2A</color>    <!-- Fondo principal -->
+
+    <!-- Texto -->
+    <color name="text_primary">#E4E4E4</color>        <!-- Gris claro en vez de blanco puro -->
+    <color name="text_secondary">#AFAFAF</color>
+    <color name="text_hint">#888888</color>
+    <color name="text_white">#EDEDED</color>          <!-- Blanco menos puro -->
+
+    <!-- Estados -->
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FFB300</color>
+    <color name="error">#D32F2F</color>
+
+    <!-- Cinturones -->
+    <color name="cinturon_blanco">#D6D6D6</color>
+    <color name="cinturon_amarillo">#FBC02D</color>
+    <color name="cinturon_naranja">#FB8C00</color>
+    <color name="cinturon_verde">#43A047</color>
+    <color name="cinturon_azul">#1E88E5</color>
+    <color name="cinturon_marron">#6D4C41</color>
+    <color name="cinturon_negro">#D6D6D6</color>
+
+    <!-- Navegación -->
+    <color name="bottom_nav_item_active_light">#E0E0E0</color>
+    <color name="bottom_nav_item_inactive_light">#999999</color>
+    <color name="divider">#333333</color>
+
+    <!-- Toolbar -->
+    <color name="toolbar_background_light">#222222</color>
+    <color name="toolbar_text_light">#F5F5F5</color>
+
 </resources>

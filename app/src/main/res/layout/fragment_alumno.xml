@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondary"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Tarjeta principal del perfil -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Header con color dinámico -->
+                <LinearLayout
+                    android:id="@+id/header_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/primary"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Avatar -->
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/avatar_alumno"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:contentDescription="Avatar del alumno"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_usuario"
+                        app:shapeAppearanceOverlay="@style/CircleImageView"
+                        app:strokeColor="@android:color/white"
+                        app:strokeWidth="3dp" />
+
+                </LinearLayout>
+
+                <!-- Contenido del perfil -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Nombre -->
+                    <TextView
+                        android:id="@+id/tv_alumno_nombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="8dp"
+                        android:text="Nombre del Alumno"
+                        android:textColor="@color/primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Cinturón -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="20dp"
+                        android:background="#F0F0F0"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="8dp">
+
+                        <View
+                            android:id="@+id/view_color_cinturon"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/ic_circle" />
+
+                        <TextView
+                            android:id="@+id/tv_alumno_cinturon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Amarillo"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="Cinturón"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <!-- Fila de estadísticas -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <!-- Miembro desde -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#E3F2FD"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp"
+                            android:layout_marginEnd="4dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Miembro desde"
+                                android:textColor="@color/primary"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_fecha_registro"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="-"
+                                android:textColor="@color/text_primary"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <!-- Asistencias totales -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#E8F5E8"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp"
+                            android:layout_marginHorizontal="2dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Total asistencias"
+                                android:textColor="@color/primary"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_asistencias_total"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="0"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <!-- Asistencias del mes -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#FFF3E0"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp"
+                            android:layout_marginStart="4dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Este mes"
+                                android:textColor="@color/primary"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_asistencias_mes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="0"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Información de clases -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:background="#F8F9FA"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📅"
+                            android:textSize="18sp"
+                            android:layout_marginEnd="8dp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Horario de clases"
+                                android:textColor="@color/primary"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_clases_alumno"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Lunes y Miércoles 18:00-19:30"
+                                android:textColor="@color/text_primary"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botón de asistencia -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_ver_asistencia"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="📊 Ver historial de asistencia"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="25dp" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

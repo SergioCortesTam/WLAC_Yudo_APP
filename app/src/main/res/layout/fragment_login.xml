@@ -1,78 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00FBFBF9"
-    android:padding="24dp"
-    android:gravity="center">
+    android:fillViewport="true"
+    android:background="@color/secondary"
+    android:padding="@dimen/spacing_xl">
 
-    <!-- Logo de la app (opcional) -->
-    <ImageView
-        android:id="@+id/img_logo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/ic_wlac"
-        android:contentDescription="Logo de la app" />
-
-    <!-- Campo de usuario -->
-    <EditText
-        android:id="@+id/edt_username"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Usuario"
-        android:inputType="text"
-        android:background="#2600D4FF"
-        android:padding="12dp"
-        android:textColor="#333333"
-        android:textColorHint="#888888"
-        android:textSize="16sp"
-        android:layout_below="@id/img_logo"
-        android:layout_marginTop="20dp"
-        android:drawableLeft="@drawable/ic_usuario"
-        android:drawablePadding="10dp"/>
+        android:layout_height="wrap_content">
 
-    <!-- Campo de contraseña -->
-    <EditText
-        android:id="@+id/edt_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:background="#2600D4FF"
-        android:padding="12dp"
-        android:textColor="#333333"
-        android:textColorHint="#888888"
-        android:textSize="16sp"
-        android:layout_below="@id/edt_username"
-        android:layout_marginTop="16dp"
-        android:drawableLeft="@drawable/ic_contrasena"
-        android:drawablePadding="10dp" />
+        <!-- Logo container with animation support -->
+        <LinearLayout
+            android:id="@+id/container_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/card_login"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_bias="0.2">
 
-    <!-- Botón de iniciar sesión -->
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Iniciar sesión"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        android:background="#0721E9"
-        android:layout_below="@id/edt_password"
-        android:layout_marginTop="24dp" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/logo_app"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_wlac"
+                android:contentDescription="Logo de WLAC Judo"
+                app:shapeAppearanceOverlay="@style/CircleImageView"
+                android:elevation="@dimen/elevation_fab"
+                android:layout_marginBottom="@dimen/spacing_md" />
 
-    <!-- Opción de 'Olvidé mi contraseña' -->
-    <TextView
-        android:id="@+id/tv_forgot_password"
-        android:layout_width="157dp"
-        android:layout_height="61dp"
-        android:layout_below="@id/btn_login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:clickable="true"
-        android:gravity="center"
-        android:text="Olvidé mi contraseña"
-        android:textColor="#2196F3"
-        android:textSize="14sp" />
-</RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WLAC Judo"
+                android:textAppearance="@style/TextAppearance.App.Title"
+                android:textColor="@color/primary" />
+        </LinearLayout>
+
+        <!-- Login card with material design -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/elevation_card"
+            app:layout_constraintTop_toBottomOf="@id/container_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/container_footer"
+            android:layout_marginTop="@dimen/spacing_xl">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Iniciar sesión"
+                    android:textAppearance="@style/TextAppearance.App.Headline"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_lg" />
+
+                <!-- Username field with material design -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Usuario"
+                    app:startIconDrawable="@drawable/ic_usuario"
+                    app:startIconTint="@color/primary"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/campo_usuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password field with material design -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_contrasena"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contraseña"
+                    app:startIconDrawable="@drawable/ic_contrasena"
+                    app:startIconTint="@color/primary"
+                    app:endIconMode="password_toggle"
+                    app:errorEnabled="true"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="@dimen/spacing_lg">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/campo_contrasena"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Login button with material design -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/boton_iniciar_sesion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Iniciar sesión"
+                    android:textSize="16sp"
+                    android:paddingVertical="@dimen/spacing_md"
+                    app:cornerRadius="@dimen/corner_md"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <!-- Loading indicator -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/barra_progreso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        app:indicatorColor="@color/accent"
+                        app:trackThickness="2dp" />
+                </FrameLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Footer for additional options -->
+        <LinearLayout
+            android:id="@+id/container_footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/card_login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/spacing_md">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/olvido_contrasena"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Olvidaste tu contraseña?"
+                android:textColor="@color/primary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

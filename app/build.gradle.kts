@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -32,12 +33,22 @@ android {
 }
 
 dependencies {
-
+    // Your existing dependencies
+    implementation(libs.material) // Make sure this is only listed once
     implementation(libs.appcompat)
-    implementation(libs.material)
+    // implementation(libs.material) // Remove this duplicate
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // Add these for Glide
+    implementation("androidx.core:core-ktx:1.7.0") // Paréntesis y comillas dobles
+    annotationProcessor("com.google.dagger:dagger-compiler:2.40.5")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 }

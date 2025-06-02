@@ -1,40 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/secondary"
+    android:fillViewport="true">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/club_image"
-            android:layout_width="221dp"
-            android:layout_height="220dp"
-            android:layout_marginBottom="16dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_wlac" />
-
-        <TextView
-            android:id="@+id/title_historia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nuestra historia"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#F44336"
-            android:layout_marginBottom="12dp" />
-
-        <TextView
-            android:id="@+id/texto_historia"
+        <!-- Imagen de cabecera con efecto parallax -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Las artes marciales son una disciplina que une la habilidad mental y física con el autocontrol. Si quieres desarrollar seguridad en ti mismo, fortaleza física y mental y velocidad en la toma de decisiones, apuntarte a clases de yudo, yu-yitsu o de defensa personal. En WLAC Yudo te ofrecemos clases grupales e individuales que son adecuadas tanto para principiantes como para expertos. Ubicado en Parla, puedes llamar al +34654745790 sin compromiso para obtener más información."
-            android:textSize="16sp"
-            android:lineSpacingExtra="8dp"
-            android:textColor="#333333" />
+            android:layout_margin="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/elevation_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imagen_club"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_wlac"
+                    android:contentDescription="Logo del club" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_lg">
+
+                    <TextView
+                        android:id="@+id/titulo_historia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nuestra historia"
+                        android:textAppearance="@style/TextAppearance.App.Headline"
+                        android:textColor="@color/primary"
+                        android:layout_marginBottom="@dimen/spacing_md" />
+
+                    <TextView
+                        android:id="@+id/texto_historia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Las artes marciales son una disciplina que une la habilidad mental y física con el autocontrol. Si quieres desarrollar seguridad en ti mismo, fortaleza física y mental y velocidad en la toma de decisiones, apuntarte a clases de yudo, yu-yitsu o de defensa personal."
+                        android:textAppearance="@style/TextAppearance.App.Body"
+                        android:lineSpacingExtra="8dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card de valores -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_md"
+            android:layout_marginVertical="@dimen/spacing_sm"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/elevation_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nuestros valores"
+                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_small"
+                        android:layout_height="@dimen/icon_small"
+                        android:src="@drawable/ic_contrasena"
+                        android:layout_marginEnd="@dimen/spacing_md"
+                        android:contentDescription="Icono de perseverancia" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Respeto"
+                            android:textAppearance="@style/TextAppearance.App.BodyLarge"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="El respeto mutuo entre alumnos y maestros es la base de nuestra escuela."
+                            android:textAppearance="@style/TextAppearance.App.Body" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_small"
+                        android:layout_height="@dimen/icon_small"
+                        android:src="@drawable/ic_contrasena"
+                        android:layout_marginEnd="@dimen/spacing_md"
+                        android:contentDescription="Icono de disciplina" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Disciplina"
+                            android:textAppearance="@style/TextAppearance.App.BodyLarge"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="La constancia y el trabajo diario forman parte de nuestro método de enseñanza."
+                            android:textAppearance="@style/TextAppearance.App.Body" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_small"
+                        android:layout_height="@dimen/icon_small"
+                        android:src="@drawable/ic_contrasena"
+                        android:layout_marginEnd="@dimen/spacing_md"
+                        android:contentDescription="Icono de superación" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Superación"
+                            android:textAppearance="@style/TextAppearance.App.BodyLarge"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Creemos en el crecimiento personal y la superación de límites."
+                            android:textAppearance="@style/TextAppearance.App.Body" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Call to action -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/elevation_card"
+            app:cardBackgroundColor="@color/primary">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Te gustaría unirte a nosotros?"
+                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                    android:textColor="@color/text_white"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="En WLAC Yudo te ofrecemos clases grupales e individuales que son adecuadas tanto para principiantes como para expertos."
+                    android:textAppearance="@style/TextAppearance.App.Body"
+                    android:textColor="@color/text_white"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_contactar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contáctanos"
+                    android:textColor="@color/primary"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:backgroundTint="@color/text_white"
+                    app:icon="@drawable/ic_email"
+                    app:iconTint="@color/primary"
+                    app:rippleColor="@color/primary_light" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Mapa interactivo -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/elevation_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Visítanos"
+                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+                    <!-- Puedes reemplazar esta imagen por un mapa real si integras un MapView -->
+                    <ImageView
+                        android:id="@+id/img_mapa"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/mapa_ubicacion"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:contentDescription="Haz clic para abrir la ubicación en el mapa" />
+
+                    <!-- Marcador para indicar la ubicación exacta -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_location_marker"
+                        android:contentDescription="Marcador de ubicación" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:text="Avenida De Juan Carlos I S/N, Parla, Madrid, 28981"
+                    android:textAppearance="@style/TextAppearance.App.Body"
+                    android:gravity="center" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
-</ScrollView>
+
+</androidx.core.widget.NestedScrollView>

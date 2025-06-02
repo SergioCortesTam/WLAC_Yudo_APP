@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "938677124279",
+    "project_id": "wlac-8367e",
+    "storage_bucket": "wlac-8367e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938677124279:android:0ade794f6a8e2f3f752132",
+        "android_client_info": {
+          "package_name": "com.example.wlac_yudo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938677124279-glanjks3opnafcj55it579eg3137ihvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_u3d-gJHOAmrcRTJ6YLWHOPMm2kGVKj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938677124279-glanjks3opnafcj55it579eg3137ihvq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

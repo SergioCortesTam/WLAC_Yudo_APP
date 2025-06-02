@@ -1,86 +1,482 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/secondary"
+    android:fillViewport="true">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_md">
 
-        <!-- Titulo de Horarios -->
-        <TextView
-            android:id="@+id/txt_horarios_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Horarios de Clases"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#F44336"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Spinner para seleccionar los horarios -->
-        <Spinner
-            android:id="@+id/spinner_horarios"
+        <!-- Header del Club -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.App.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="@dimen/spacing_md"
+            app:cardBackgroundColor="@color/primary">
 
-        <!-- Texto de Precios -->
-        <TextView
-            android:id="@+id/txt_precios_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Precios"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#F44336"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Precios -->
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/txt_chiquiyudo"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chiquiyudo: 10,00 €\n(Nacidos en 2018 y 2017)"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginBottom="8dp" />
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
 
-            <TextView
-                android:id="@+id/txt_yudo_infantil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Yudo Infantil: 18,00 €\n(2016 - 2010)"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginBottom="8dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🥋 Club de Judo WLAC"
+                    android:textAppearance="@style/TextAppearance.App.Display"
+                    android:textColor="@color/text_white"
+                    android:gravity="center"
+                    android:layout_marginBottom="@dimen/spacing_sm" />
 
-            <TextView
-                android:id="@+id/txt_yudo_juvenil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Yudo Juvenil: 20,00 €\n(Nacidos en 2009 y anteriores)"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginBottom="16dp" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Formando judokas desde hace más de 20 años"
+                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                    android:textColor="@color/text_white"
+                    android:gravity="center" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Botón para Contactar -->
-        <Button
-            android:id="@+id/btn_contactar"
+        <!-- Formulario de Inscripción -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.App.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="¡Contacta con nosotros para inscribirte!"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp" />
+            android:layout_marginBottom="@dimen/spacing_md">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📝 Datos de Inscripción"
+                    android:textAppearance="@style/TextAppearance.App.Title"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <!-- Nombre del participante -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre completo del participante"
+                    android:layout_marginBottom="@dimen/spacing_sm">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/campo_nombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/text_primary"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Fecha de nacimiento -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Fecha de nacimiento (DD/MM/AAAA)"
+                    android:layout_marginBottom="@dimen/spacing_sm">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/campo_fecha_nacimiento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:textColor="@color/text_primary"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Teléfono -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Teléfono de contacto"
+                    android:layout_marginBottom="@dimen/spacing_sm">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/campo_telefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textColor="@color/text_primary"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Email -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email de contacto"
+                    android:layout_marginBottom="@dimen/spacing_sm">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/campo_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/text_primary"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Selector de grupo -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Selecciona un grupo"
+                    android:layout_marginBottom="@dimen/spacing_sm">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/selector_grupo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:textColor="@color/text_primary"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Selector de turno -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Selecciona turno"
+                    android:layout_marginBottom="@dimen/spacing_sm">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/selector_turno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:textColor="@color/text_primary"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Experiencia previa -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nivel judo (opcional)"
+                    android:layout_marginBottom="@dimen/spacing_sm">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/selector_experiencia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:textColor="@color/text_primary"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Observaciones médicas -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Observaciones médicas (opcional)"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/campo_observaciones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:textColor="@color/text_primary"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Tabla de horarios -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.App.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:visibility="gone"
+            android:id="@+id/card_horarios">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📅 Horario Seleccionado"
+                    android:textAppearance="@style/TextAppearance.App.Title"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableLayout
+                        android:id="@+id/tabla_horarios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="300dp">
+
+                        <TableRow
+                            android:background="@color/primary"
+                            android:padding="@dimen/spacing_sm">
+                            <TextView
+                                android:text="Día"
+                                android:textColor="@color/text_white"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:minWidth="80dp"/>
+                            <TextView
+                                android:text="Hora"
+                                android:textColor="@color/text_white"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:minWidth="120dp"/>
+                            <TextView
+                                android:text="Grupo"
+                                android:textColor="@color/text_white"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:minWidth="140dp"/>
+                        </TableRow>
+                    </TableLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card Precios -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.App.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_md">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="💰 Precios Mensuales"
+                    android:textAppearance="@style/TextAppearance.App.Title"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <!-- Cards de precios -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Precio 1: Chiqui Judo -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/precio_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_sm"
+                        app:cardBackgroundColor="@color/precio_claro"
+                        app:cardCornerRadius="@dimen/corner_md"
+                        app:strokeColor="@color/primary_light"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/spacing_md">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Chiqui Judo y Judo Infantil"
+                                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                                    android:textColor="@color/text_primary"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nacidos en 2018 a 2010"
+                                    android:textAppearance="@style/TextAppearance.App.Caption"
+                                    android:textColor="@color/text_secondary"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/texto_precio_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="10,00 €"
+                                android:textAppearance="@style/TextAppearance.App.Headline"
+                                android:textColor="@color/primary"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Precio 2: Judo Alevín y Cadete -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/precio_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_sm"
+                        app:cardBackgroundColor="@color/precio_claro"
+                        app:cardCornerRadius="@dimen/corner_md"
+                        app:strokeColor="@color/primary_light"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/spacing_md">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Judo Alevín y Judo Cadete"
+                                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                                    android:textColor="@color/text_primary"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2016 - 2009"
+                                    android:textAppearance="@style/TextAppearance.App.Caption"
+                                    android:textColor="@color/text_secondary"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/texto_precio_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="18,00 €"
+                                android:textAppearance="@style/TextAppearance.App.Headline"
+                                android:textColor="@color/primary"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Precio 3: Judo Adulto y Defensa Personal -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/precio_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/precio_claro"
+                        app:cardCornerRadius="@dimen/corner_md"
+                        app:strokeColor="@color/primary_light"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/spacing_md">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Judo Adulto y Defensa Personal"
+                                    android:textAppearance="@style/TextAppearance.App.Subtitle"
+                                    android:textColor="@color/text_primary"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nacidos en 2008 y anteriores"
+                                    android:textAppearance="@style/TextAppearance.App.Caption"
+                                    android:textColor="@color/text_secondary"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/texto_precio_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="20,00 €"
+                                android:textAppearance="@style/TextAppearance.App.Headline"
+                                android:textColor="@color/primary"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Información importante -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.App.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_md">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ℹ️ Información Importante"
+                    android:textAppearance="@style/TextAppearance.App.Title"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="✅ El precio incluye: Clases, seguro deportivo y uso de instalaciones\n\n🥋 Uniforme (judogi): Se adquiere por separado\n\n📅 Inicio de temporada: Septiembre\n\n💳 Forma de pago: Mensual por domiciliación bancaria\n\n📋 Documentación requerida: Certificado médico, autorización paterna (menores) y datos bancarios"
+                    android:textAppearance="@style/TextAppearance.App.Body"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="4dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botón de Inscripción -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/boton_inscribirse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📧 Enviar Solicitud de Inscripción"
+            android:textColor="@color/text_white"
+            android:backgroundTint="@color/colorPrimary"
+            style="@style/Widget.App.Button.Secondary"
+            android:padding="@dimen/spacing_md"
+            android:textSize="16sp" />
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

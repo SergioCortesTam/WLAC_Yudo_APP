@@ -1,132 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:fitsSystemWindows="true">
 
-    <!-- Barra superior -->
-    <LinearLayout
-        android:id="@+id/top_nav"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="#F44336"
-        android:paddingHorizontal="10dp">
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:elevation="@dimen/elevation_appbar">
 
-        <Button
-            android:id="@+id/btn_historia"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/text_white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_logo"
+                    android:layout_width="@dimen/icon_medium"
+                    android:layout_height="@dimen/icon_medium"
+                    android:contentDescription="Logo WLAC"
+                    android:src="@drawable/ic_wlac"
+                    android:layout_marginEnd="@dimen/spacing_md" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="WLAC Judo"
+                    android:textAppearance="@style/TextAppearance.App.Title"
+                    android:textColor="@color/text_white" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_login_icono"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_white"
+                    app:iconTint="@color/text_white"
+                    app:strokeColor="@color/text_white"
+                    app:icon="@drawable/ic_usuario_bloqueado" />
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Historia"
-            android:textColor="#fff"
-            android:background="@android:color/transparent" />
+            app:tabTextColor="@color/primary_light"
+            app:tabSelectedTextColor="@color/primary_dark"
+            app:tabIndicatorColor="@color/accent"
+            app:tabGravity="fill"
+            app:tabMode="fixed">
 
-        <Button
-            android:id="@+id/btn_horarios"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Horarios"
-            android:textColor="#fff"
-            android:background="@android:color/transparent" />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Historia" />
 
-        <Button
-            android:id="@+id/btn_productos"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Productos"
-            android:textColor="#fff"
-            android:background="@android:color/transparent" />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inscripciones" />
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:textColor="#fff"
-            android:background="@android:color/transparent" />
-    </LinearLayout>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Productos" />
+        </com.google.android.material.tabs.TabLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Contenido dinámico -->
     <FrameLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/top_nav"
-        android:layout_above="@id/bottom_nav"
-        android:padding="16dp" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <!-- Barra inferior -->
-    <LinearLayout
-        android:id="@+id/bottom_nav"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/social_bar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="#eeeeee"
-        android:gravity="center"
-        android:paddingHorizontal="5dp">
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        app:elevation="@dimen/elevation_appbar"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@null"
+        app:menu="@menu/menu_social" />
 
-        <ImageButton
-            android:id="@+id/btn_vimeo"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_vimeo"
-            android:background="@android:color/transparent"
-            android:contentDescription="Vimeo" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <ImageButton
-            android:id="@+id/btn_x"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_x"
-            android:background="@android:color/transparent"
-            android:contentDescription="Twitter X" />
-
-        <ImageButton
-            android:id="@+id/btn_whatsapp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_whatsapp"
-            android:background="@android:color/transparent"
-            android:contentDescription="WhatsApp" />
-
-        <ImageButton
-            android:id="@+id/btn_youtube"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_youtube"
-            android:background="@android:color/transparent"
-            android:contentDescription="YouTube" />
-
-        <ImageButton
-            android:id="@+id/btn_instagram"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_instagram"
-            android:background="@android:color/transparent"
-            android:contentDescription="Instagram" />
-
-        <ImageButton
-            android:id="@+id/btn_facebook"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_facebook"
-            android:background="@android:color/transparent"
-            android:contentDescription="Facebook" />
-    </LinearLayout>
-
-
-</RelativeLayout>
