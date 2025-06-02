@@ -39,7 +39,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         holder.tvNombre.setText(producto.getNombre());
         holder.tvPrecio.setText(String.format(Locale.getDefault(), "€%.2f", producto.getPrecio()));
         holder.tvCategoria.setText(producto.getCategoria());
-        // holder.tvDescripcion.setText(producto.getDescripcion()); // If you want to show it directly
+        // holder.tvDescripcion.setText(producto.getDescripcion());
 
         if (producto.getImageUrl() != null && !producto.getImageUrl().isEmpty()) {
             Glide.with(context)

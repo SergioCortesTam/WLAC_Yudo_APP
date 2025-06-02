@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private BottomNavigationView socialBar;
-    private MaterialButton btnLoginIcono;  // Cambiado a MaterialButton
+    private MaterialButton btnLoginIcono;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -36,10 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView nav = findViewById(R.id.social_bar);
-        nav.setItemIconTintList(null); // Esto asegura que NO se aplique tintado
-
-
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
@@ -48,22 +44,25 @@ public class MainActivity extends AppCompatActivity {
         socialBar = findViewById(R.id.social_bar);
         btnLoginIcono = findViewById(R.id.btn_login_icono);
 
-        // Cargar fragmento inicial
-        cargarFragmento(new HistoriaFragment());
+        // Quitar tintado de iconos
+        socialBar.setItemIconTintList(null);
 
-        // Tabs: Historia, Horarios, Productos
+        // Fragmento inicial
+        cargarFragmento(new HistoriaFragment(), false);
+
+        // Tabs
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        cargarFragmento(new HistoriaFragment());
+                        cargarFragmento(new HistoriaFragment(), false);
                         break;
                     case 1:
-                        cargarFragmento(new HorariosFragment());
+                        cargarFragmento(new HorariosFragment(), false);
                         break;
                     case 2:
-                        cargarFragmento(new ProductosFragment());
+                        cargarFragmento(new ProductosFragment(), false);
                         break;
                 }
             }
@@ -79,25 +78,25 @@ public class MainActivity extends AppCompatActivity {
             if (id == R.id.menu_instagram) {
                 abrirEnlace("https://www.instagram.com/wlacyudo/#");
             } else if (id == R.id.menu_whatsapp) {
-                abrirEnlace("https://wa.me/123456789");
+                abrirEnlace("https://wa.me/673419314");
             } else if (id == R.id.menu_youtube) {
                 abrirEnlace("https://www.youtube.com/channel/UCkLErE2yakUmCuhfEaeuFAg");
             } else if (id == R.id.menu_facebook) {
-                abrirEnlace("https://www.facebook.com");
+                abrirEnlace("https://www.facebook.com/WLACyudo");
             } else if (id == R.id.menu_x) {
-                abrirEnlace("https://twitter.com");
+                abrirEnlace("https://x.com/WLAC_yudo");
             }
 
             return true;
         });
 
-        // Login / Perfil
+        // Botón login / perfil
         btnLoginIcono.setOnClickListener(v -> {
             boolean logueado = mAuth.getCurrentUser() != null;
             boolean sessionActiva = prefs.getBoolean(KEY_SESSION, false);
 
             if (!logueado || !sessionActiva) {
-                cargarFragmento(new LoginFragment());
+                cargarFragmento(new LoginFragment(), true);
             } else {
                 mostrarMenuSesion(v);
             }
@@ -114,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         boolean logueado = mAuth.getCurrentUser() != null;
         boolean sessionActiva = prefs.getBoolean(KEY_SESSION, false);
 
-        btnLoginIcono.setIconResource(  // Cambiado de setImageResource a setIconResource
+        btnLoginIcono.setIconResource(
                 (logueado && sessionActiva)
                         ? R.drawable.ic_usuario_desbloqueado
                         : R.drawable.ic_usuario_bloqueado
@@ -133,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 mAuth.signOut();
                 prefs.edit().putBoolean(KEY_SESSION, false).apply();
                 actualizarIconoSesion();
-                cargarFragmento(new HistoriaFragment());
+                cargarFragmento(new HistoriaFragment(), false);
                 return true;
             }
             return false;
@@ -141,10 +140,12 @@ public class MainActivity extends AppCompatActivity {
         menu.show();
     }
 
-    private void cargarFragmento(Fragment fragment) {
+    private void cargarFragmento(Fragment fragment, boolean addToBackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_content, fragment);
-        ft.addToBackStack(null);
+        if (addToBackStack) {
+            ft.addToBackStack(null);
+        }
         ft.commit();
     }
 
@@ -172,11 +173,8 @@ public class MainActivity extends AppCompatActivity {
                             fragment = new AlumnoFragment();
                         }
 
-                        cargarFragmento(fragment);
+                        cargarFragmento(fragment, true);
                     }
-                })
-                .addOnFailureListener(e -> {
-                    // Aquí puedes mostrar un mensaje de error si quieres
                 });
     }
 }

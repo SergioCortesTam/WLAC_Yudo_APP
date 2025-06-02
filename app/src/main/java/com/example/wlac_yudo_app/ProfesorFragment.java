@@ -108,7 +108,7 @@ public class ProfesorFragment extends Fragment {
         layout.addView(tvCategoria);
 
         Spinner sCategoria = new Spinner(requireContext());
-        String[] categorias = {"Equipamiento", "Uniformes", "Otros"}; // Define your categories
+        String[] categorias = {"Judogui", "Merchandaising", "Otros"}; // Define your categories
         ArrayAdapter<String> adCategoria = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
