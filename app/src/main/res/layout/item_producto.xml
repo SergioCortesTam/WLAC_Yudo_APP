@@ -4,87 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardElevation="4dp"
+    android:layout_margin="6dp"
+    app:cardElevation="3dp"
     app:cardCornerRadius="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp">
+        android:orientation="horizontal"
+        android:padding="2dp"
+        android:gravity="center_vertical"
+        android:baselineAligned="false">
 
-        <!-- Línea 1: Imagen -->
-        <ImageView
-            android:id="@+id/img_producto"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <!-- Línea 2: Nombre producto -->
-        <TextView
-            android:id="@+id/txt_nombre_producto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
-            android:textStyle="bold"
-            android:maxLines="2"
-            android:ellipsize="end"
-            tools:text="Nombre del Producto" />
-
+        <!-- Main Content -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingEnd="12dp">
 
+            <!-- Product Name -->
             <TextView
-                android:id="@+id/txt_categoria_producto"
-                android:layout_width="wrap_content"
+                android:id="@+id/txt_nombre_producto"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceCaption"
-                android:background="@drawable/chip_background_simple"
-                tools:text="Categoría" />
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textStyle="bold"
+                tools:text="Kimono de Judo Blanco Tradicional" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
+            <!-- Price -->
             <TextView
                 android:id="@+id/txt_precio_producto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceBody2"
+                android:layout_marginTop="4dp"
+                android:textAppearance="?attr/textAppearanceBody1"
                 android:textColor="?attr/colorPrimary"
                 android:textStyle="bold"
                 tools:text="€29.99" />
+
+            <!-- Size Selector -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/radio_group_tipo_talla"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_ninos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:checked="true"
+                        android:text="Niño"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_adultos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Adulto"
+                        android:textSize="12sp" />
+                </RadioGroup>
+
+                <!-- Size Spinners Container -->
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Spinner
+                        android:id="@+id/spinner_tallas_ninos"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible" />
+
+                    <Spinner
+                        android:id="@+id/spinner_tallas_adultos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+                </FrameLayout>
+            </LinearLayout>
         </LinearLayout>
 
-
-
-        <!-- Línea 5: Botón centrado -->
-        <Button
-            android:id="@+id/btn_anadir_carrito"
+        <!-- Image and Button Container -->
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Añadir al Carrito"
-            android:textSize="12sp" />
+            android:gravity="center">
 
-        <!-- Descripción oculta -->
-        <TextView
-            android:id="@+id/txt_descripcion_producto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:maxLines="3"
-            android:ellipsize="end"
-            android:visibility="gone"
-            tools:text="Una breve descripción del producto." />
+            <!-- Product Image -->
+
+            <!-- Add to Cart Button -->
+            <ImageView
+                android:id="@+id/img_producto"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:background="@color/secondary"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_anadir_carrito"
+
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_below="@+id/img_producto"
+                android:layout_alignStart="@id/img_producto"
+                android:layout_alignEnd="@id/img_producto"
+                android:layout_marginTop="-1dp"
+                android:paddingHorizontal="1dp"
+                android:text="Añadir"
+                android:textSize="12sp"
+                app:strokeWidth="1dp" />
+        </RelativeLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

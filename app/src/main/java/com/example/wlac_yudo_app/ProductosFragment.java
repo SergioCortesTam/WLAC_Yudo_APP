@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
@@ -73,7 +74,12 @@ public class ProductosFragment extends Fragment {
     private void setupRecyclerView() {
         listaProductos = new ArrayList<>();
         productoAdapter = new ProductoAdapter(requireContext(), listaProductos);
-        recyclerProductos.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+        // Cambiar de GridLayoutManager a LinearLayoutManager para lista vertical
+        recyclerProductos.setLayoutManager(new LinearLayoutManager(getContext()));
+        // Si quieres lista horizontal, usa:
+        // recyclerProductos.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
         recyclerProductos.setAdapter(productoAdapter);
     }
 

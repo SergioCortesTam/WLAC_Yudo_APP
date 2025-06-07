@@ -112,7 +112,6 @@ public class LoginFragment extends Fragment {
                         Toast.LENGTH_LONG).show());
     }
     private void mostrarDialogoRecuperarContrasena() {
-        // Crear un EditText dinámico
         final EditText inputCorreo = new EditText(getContext());
         inputCorreo.setHint("Correo registrado");
         inputCorreo.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);

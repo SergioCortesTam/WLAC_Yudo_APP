@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Locale;
 
 public class CartManager {
     private static CartManager instance;
@@ -21,7 +20,7 @@ public class CartManager {
         return instance;
     }
 
-    public void addItem(Producto producto) {
+    public void addItem(Producto producto, String tallaSeleccionada) {
         if (items.containsKey(producto.getId())) {
             CartItem currentItem = items.get(producto.getId());
             if (currentItem != null) {
