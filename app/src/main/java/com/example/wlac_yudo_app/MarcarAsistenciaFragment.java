@@ -25,58 +25,66 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+
 public class MarcarAsistenciaFragment extends Fragment {
+    // Fragmento para que los profesores marquen asistencia de alumnos
 
     private FirebaseFirestore db;
-    private LinearLayout layoutAlumnos;
-    private TextView txtFecha;
-    private Calendar fechaActual;
-    private Button btnGuardar;
+    private LinearLayout layoutAlumnos; // Contenedor para lista de alumnos
+    private TextView txtFecha; // Muestra fecha seleccionada
+    private Calendar fechaActual; // Fecha que se está visualizando
+    private Button btnGuardar; // Botón para guardar asistencias
 
-    public MarcarAsistenciaFragment() {}
-
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_marcar_asistencia, container, false);
 
+        // Inicializar Firestore
         db = FirebaseFirestore.getInstance();
-        // Usamos el ID correcto según el XML - layout_alumno
+
+        // Obtener referencias de vistas
         layoutAlumnos = view.findViewById(R.id.layout_alumno);
         txtFecha = view.findViewById(R.id.txt_fecha_asistencia);
         Button btnAnterior = view.findViewById(R.id.btn_fecha_anterior);
         Button btnSiguiente = view.findViewById(R.id.btn_fecha_siguiente);
         btnGuardar = view.findViewById(R.id.btn_guardar_asistencias);
 
+        // Configurar fecha actual
         fechaActual = Calendar.getInstance();
-        actualizarFecha();
+        actualizarFecha(); // Cargar datos iniciales
 
+        // Botones para navegar entre fechas
         btnAnterior.setOnClickListener(v -> {
             fechaActual.add(Calendar.DAY_OF_MONTH, -1);
             actualizarFecha();
         });
+
         btnSiguiente.setOnClickListener(v -> {
             fechaActual.add(Calendar.DAY_OF_MONTH, 1);
             actualizarFecha();
         });
 
+        // Guardar asistencias marcadas
         btnGuardar.setOnClickListener(v -> guardarTodasAsistencias());
 
         return view;
     }
 
+    // Actualiza la fecha mostrada y carga los alumnos
     private void actualizarFecha() {
         String fechaStr = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 .format(fechaActual.getTime());
         txtFecha.setText(fechaStr);
-        cargarAlumnosYAsistencias(fechaStr);
+        cargarAlumnosYAsistencias(fechaStr); // Cargar datos para esta fecha
     }
 
+    // Carga alumnos y sus estados de asistencia
     private void cargarAlumnosYAsistencias(String fechaStr) {
-        layoutAlumnos.removeAllViews();
+        layoutAlumnos.removeAllViews(); // Limpiar vista anterior
 
+        // Consultar todos los alumnos
         db.collection("users")
                 .whereEqualTo("role", "alumno")
                 .get()
@@ -85,7 +93,7 @@ public class MarcarAsistenciaFragment extends Fragment {
                         String alumnoId = doc.getId();
                         String nombre = doc.getString("nombre");
 
-                        // Inflamos el item
+                        // Crear vista para cada alumno
                         View alumnoView = LayoutInflater.from(getContext())
                                 .inflate(R.layout.item_asistencia_alumno, layoutAlumnos, false);
 
@@ -93,9 +101,9 @@ public class MarcarAsistenciaFragment extends Fragment {
                         CheckBox chkAsistio = alumnoView.findViewById(R.id.chk_asistio);
 
                         txtNombre.setText(nombre);
-                        alumnoView.setTag(alumnoId);  // guardamos el ID para luego
+                        alumnoView.setTag(alumnoId); // Guardar ID para referencia
 
-                        // Carga estado previo
+                        // Cargar estado de asistencia previo (si existe)
                         String docId = alumnoId + "_" + fechaStr;
                         db.collection("Asistencias").document(docId)
                                 .get()
@@ -111,38 +119,40 @@ public class MarcarAsistenciaFragment extends Fragment {
                 });
     }
 
+    // Guarda todas las asistencias marcadas
     private void guardarTodasAsistencias() {
         String fechaStr = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 .format(fechaActual.getTime());
 
+        // Usar batch para múltiples escrituras eficientes
         WriteBatch batch = db.batch();
-        int childCount = layoutAlumnos.getChildCount();
-        for (int i = 0; i < childCount; i++) {
+
+        // Recorrer todos los alumnos en la vista
+        for (int i = 0; i < layoutAlumnos.getChildCount(); i++) {
             View alumnoView = layoutAlumnos.getChildAt(i);
             String alumnoId = (String) alumnoView.getTag();
-            TextView txtNombre = alumnoView.findViewById(R.id.txt_nombre_alumno);
             CheckBox chk = alumnoView.findViewById(R.id.chk_asistio);
 
-            // Preparamos datos
+            // Preparar datos de asistencia
             HashMap<String, Object> data = new HashMap<>();
             data.put("alumnoId", alumnoId);
-            data.put("nombreAlumno", txtNombre.getText().toString());
+            data.put("nombreAlumno", ((TextView) alumnoView.findViewById(R.id.txt_nombre_alumno)).getText().toString());
             data.put("fecha", fechaStr);
             data.put("asistio", chk.isChecked());
             data.put("clase", "Clase General");
 
-            // Referencia al doc
+            // Añadir operación al batch
             String docId = alumnoId + "_" + fechaStr;
             batch.set(db.collection("Asistencias").document(docId), data, SetOptions.merge());
         }
 
-        // Ejecutamos batch
+        // Ejecutar todas las operaciones
         batch.commit()
                 .addOnSuccessListener(aVoid ->
                         Toast.makeText(getContext(), "Asistencias guardadas", Toast.LENGTH_SHORT).show()
                 )
                 .addOnFailureListener(e ->
-                        Toast.makeText(getContext(), "Error al guardar asistencias", Toast.LENGTH_LONG).show()
+                        Toast.makeText(getContext(), "Error al guardar", Toast.LENGTH_LONG).show()
                 );
     }
 }

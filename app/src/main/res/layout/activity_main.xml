@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
+    <!-- Contenedor superior que incluye la barra de herramientas y las pestañas -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -13,17 +14,20 @@
         android:background="@color/primary"
         android:elevation="@dimen/elevation_appbar">
 
+        <!-- Barra superior con el logo, el título y el botón de login -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:titleTextColor="@color/text_white">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
+                <!-- Logo del club WLAC -->
                 <ImageView
                     android:id="@+id/img_logo"
                     android:layout_width="@dimen/icon_medium"
@@ -32,6 +36,7 @@
                     android:src="@drawable/ic_wlac"
                     android:layout_marginEnd="@dimen/spacing_md" />
 
+                <!-- Título de la aplicación -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -40,6 +45,7 @@
                     android:textAppearance="@style/TextAppearance.App.Title"
                     android:textColor="@color/text_white" />
 
+                <!-- Botón para acceder a la pantalla de login -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_login_icono"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
@@ -52,6 +58,7 @@
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
+        <!-- Pestañas para navegar entre secciones informativas -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
@@ -79,6 +86,7 @@
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Área principal donde se cargan los fragmentos -->
     <FrameLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
@@ -86,6 +94,7 @@
         android:layout_marginBottom="56dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <!-- Barra inferior para enlaces a redes sociales -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/social_bar"
         android:layout_width="match_parent"

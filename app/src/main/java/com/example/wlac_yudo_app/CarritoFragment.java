@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class CarritoFragment extends Fragment implements CarritoAdapter.OnCartUpdatedListener {
-
+    // Fragmento para gestionar el carrito de compras
     private RecyclerView recyclerCarritoItems;
     private CarritoAdapter carritoAdapter;
     private List<CartManager.CartItem> itemsDelCarrito;
@@ -32,32 +32,32 @@ public class CarritoFragment extends Fragment implements CarritoAdapter.OnCartUp
     private Button btnSolicitarProductos;
     private final String TU_DIRECCION_DE_CORREO = "o0osergio0o@gmail.com";
 
-    public CarritoFragment() {
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carrito, container, false);
 
+        // Obtener referencias de vistas
         recyclerCarritoItems = view.findViewById(R.id.recycler_carrito_items);
         tvTotalCarrito = view.findViewById(R.id.txt_total_carrito);
         btnSolicitarProductos = view.findViewById(R.id.btn_solicitar_productos);
         tvCarritoVacio = view.findViewById(R.id.txt_carrito_vacio);
 
-        itemsDelCarrito = new ArrayList<>(CartManager.getInstance().getCartItems()); // Copia para el adaptador
+        // Inicializar adaptador con los items actuales
+        itemsDelCarrito = new ArrayList<>(CartManager.getInstance().getCartItems());
         carritoAdapter = new CarritoAdapter(getContext(), itemsDelCarrito, this);
 
         recyclerCarritoItems.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerCarritoItems.setAdapter(carritoAdapter);
 
+        // Configurar botón de solicitud
         btnSolicitarProductos.setOnClickListener(v -> enviarSolicitudPorEmail());
 
         actualizarVistaCarrito();
         return view;
     }
 
+    // Envía email con el pedido
     private void enviarSolicitudPorEmail() {
         List<CartManager.CartItem> currentCartItems = CartManager.getInstance().getCartItems();
         if (currentCartItems.isEmpty()) {
@@ -65,6 +65,7 @@ public class CarritoFragment extends Fragment implements CarritoAdapter.OnCartUp
             return;
         }
 
+        // Construir cuerpo del email
         StringBuilder emailBody = new StringBuilder();
         emailBody.append("Solicitud de productos:\n\n");
         for (CartManager.CartItem item : currentCartItems) {
@@ -73,45 +74,43 @@ public class CarritoFragment extends Fragment implements CarritoAdapter.OnCartUp
                     p.getNombre(), item.getQuantity(), p.getPrecio()));
         }
         emailBody.append(String.format(Locale.getDefault(), "\nTotal del pedido: €%.2f", CartManager.getInstance().getTotalPrice()));
-        emailBody.append("\n\nPor favor, preparar este pedido si los artículos están disponibles.");
-        // Aquí podrías añadir información del usuario si está logueado y quieres incluirla.
-         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-         if (user != null && user.getEmail() != null) {
-             emailBody.append("\n\nSolicitado por: ").append(user.getEmail());
-         }
 
+        // Añadir información del usuario si está logueado
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null && user.getEmail() != null) {
+            emailBody.append("\n\nSolicitado por: ").append(user.getEmail());
+        }
 
+        // Crear intent para enviar email
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setData(Uri.parse("mailto:")); // Solo apps de email
+        emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{TU_DIRECCION_DE_CORREO});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Solicitud de Productos - App Yudo");
         emailIntent.putExtra(Intent.EXTRA_TEXT, emailBody.toString());
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Enviar email usando..."));
-            // Opcional: Limpiar carrito después de enviar
-            // CartManager.getInstance().clearCart();
-            // actualizarVistaCarrito();
         } catch (ActivityNotFoundException ex) {
             Toast.makeText(getContext(), "No hay ninguna aplicación de email instalada.", Toast.LENGTH_SHORT).show();
         }
     }
 
+    // Actualiza la vista cuando cambia el carrito
     @Override
     public void onCartUpdated() {
         actualizarVistaCarrito();
     }
 
+    // Refresca la interfaz del carrito
     private void actualizarVistaCarrito() {
-        // Actualiza la lista local del adaptador si es necesario (aunque el listener ya lo hace).
-        // Aquí principalmente actualizamos el total y la visibilidad de "carrito vacío".
         itemsDelCarrito.clear();
-        itemsDelCarrito.addAll(CartManager.getInstance().getCartItems()); // Obtiene la lista más reciente
-        carritoAdapter.notifyDataSetChanged(); // Notifica al adaptador de los cambios
+        itemsDelCarrito.addAll(CartManager.getInstance().getCartItems());
+        carritoAdapter.notifyDataSetChanged();
 
         double total = CartManager.getInstance().getTotalPrice();
         tvTotalCarrito.setText(String.format(Locale.getDefault(), "Total: €%.2f", total));
 
+        // Mostrar/ocultar elementos según contenido
         if (itemsDelCarrito.isEmpty()) {
             tvCarritoVacio.setVisibility(View.VISIBLE);
             recyclerCarritoItems.setVisibility(View.GONE);
@@ -126,7 +125,6 @@ public class CarritoFragment extends Fragment implements CarritoAdapter.OnCartUp
     @Override
     public void onResume() {
         super.onResume();
-        // Asegúrate de que el carrito se actualice si el usuario vuelve a este fragment
         actualizarVistaCarrito();
     }
 }

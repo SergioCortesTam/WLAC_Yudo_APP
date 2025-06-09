@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoViewHolder> {
-
+    // Adaptador para el RecyclerView del carrito
     private List<CartManager.CartItem> cartItems;
     private Context context;
-    private OnCartUpdatedListener cartUpdatedListener; // Interfaz para actualizar el total
+    private OnCartUpdatedListener cartUpdatedListener; // Callback para actualizar total
 
     public interface OnCartUpdatedListener {
         void onCartUpdated();
@@ -40,16 +40,18 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
         CartManager.CartItem cartItem = cartItems.get(position);
         Producto producto = cartItem.getProducto();
 
+        // Configurar vista con datos del producto
         holder.tvNombreProducto.setText(producto.getNombre());
         holder.tvPrecioProducto.setText(String.format(Locale.getDefault(), "€%.2f", producto.getPrecio()));
         holder.tvCantidad.setText(String.format(Locale.getDefault(), "Qty: %d", cartItem.getQuantity()));
 
+        // Botón para eliminar producto del carrito
         holder.btnEliminar.setOnClickListener(v -> {
             CartManager.getInstance().removeProductCompletely(producto.getId());
-            cartItems.remove(position); // Elimina de la lista local del adaptador
+            cartItems.remove(position);
             notifyItemRemoved(position);
-            notifyItemRangeChanged(position, cartItems.size()); // Actualiza las posiciones
-            cartUpdatedListener.onCartUpdated(); // Notifica para actualizar el total y la vista
+            notifyItemRangeChanged(position, cartItems.size());
+            cartUpdatedListener.onCartUpdated();
             Toast.makeText(context, producto.getNombre() + " eliminado del carrito", Toast.LENGTH_SHORT).show();
         });
     }
@@ -59,6 +61,7 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
         return cartItems.size();
     }
 
+    // Actualiza los items del carrito
     public void updateCartItems(List<CartManager.CartItem> newCartItems) {
         this.cartItems.clear();
         this.cartItems.addAll(newCartItems);
@@ -66,6 +69,7 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
         cartUpdatedListener.onCartUpdated();
     }
 
+    // ViewHolder para los elementos del carrito
     static class CarritoViewHolder extends RecyclerView.ViewHolder {
         TextView tvNombreProducto, tvPrecioProducto, tvCantidad;
         ImageButton btnEliminar;

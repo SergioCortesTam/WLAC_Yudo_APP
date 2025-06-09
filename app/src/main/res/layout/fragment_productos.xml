@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- AppBar con barra superior y título -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_productos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
 
+        <!-- Toolbar con el título de la pantalla -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_productos"
             android:layout_width="match_parent"
@@ -24,17 +26,16 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary" />
-
         </androidx.appcompat.widget.Toolbar>
-
-
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Contenedor principal que se puede desplazar -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <!-- Lista de productos mostrada en formato de rejilla -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_productos"
             android:layout_width="match_parent"
@@ -44,10 +45,9 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/item_producto" />
-
     </androidx.core.widget.NestedScrollView>
 
-    <!-- FAB para agregar producto (solo profesores) -->
+    <!-- Botón flotante para que los profesores puedan añadir productos -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_agregar_producto"
         android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
         app:srcCompat="@drawable/ic_add"
         app:backgroundTint="@color/black" />
 
-    <!-- FAB para carrito de compras -->
+    <!-- Botón flotante que lleva al carrito de compras -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_carrito"
         android:layout_width="wrap_content"

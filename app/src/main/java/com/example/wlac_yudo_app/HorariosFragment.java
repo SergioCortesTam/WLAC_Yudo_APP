@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class HorariosFragment extends Fragment {
-
+    // Fragmento para mostrar horarios y formulario de inscripción
     // Campos del formulario
     private TextInputEditText campoNombre, campoFechaNacimiento, campoTelefono, campoEmail, campoObservaciones;
     private MaterialAutoCompleteTextView selectorGrupo, selectorTurno, selectorExperiencia;
@@ -56,7 +56,7 @@ public class HorariosFragment extends Fragment {
 
         return view;
     }
-
+    // Inicializa elementos de la interfaz
     private void inicializarVistas(View view) {
         // Campos de formulario
         campoNombre = view.findViewById(R.id.campo_nombre);
@@ -85,6 +85,7 @@ public class HorariosFragment extends Fragment {
         textoPrecio3 = view.findViewById(R.id.texto_precio_3);
     }
 
+    // Configura datos para los selectores
     private void configurarDatos() {
         String[] grupos = {"Chiqui Judo", "Judo Infantil", "Judo Alevín", "Judo Cadete", "Judo Adultos", "Defensa Personal"};
         String[] turnos = {"Lunes y Miércoles", "Martes y Jueves"};
@@ -133,7 +134,7 @@ public class HorariosFragment extends Fragment {
         // Botón de inscripción
         btnInscribirse.setOnClickListener(v -> procesarInscripcion());
     }
-
+    // Muestra selector de fecha
     private void mostrarSelectorFecha() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 getActivity(),
@@ -148,7 +149,7 @@ public class HorariosFragment extends Fragment {
         );
         datePickerDialog.show();
     }
-
+    // Actualiza la tabla de horarios
     private void actualizarTabla() {
         if (selectorGrupo.getText().toString().isEmpty() || selectorTurno.getText().toString().isEmpty()) {
             cardHorarios.setVisibility(View.GONE);
@@ -158,7 +159,7 @@ public class HorariosFragment extends Fragment {
         // Mostrar la card de horarios
         cardHorarios.setVisibility(View.VISIBLE);
 
-        // Limpiar filas existentes (excepto el header)
+        // Limpiar filas existentes (excepto el header) y Generar filas de horarios dinámicamente
         tablaHorarios.removeViews(1, tablaHorarios.getChildCount() - 1);
 
         int index = grupoIndex.get(selectorGrupo.getText().toString());
@@ -255,6 +256,7 @@ public class HorariosFragment extends Fragment {
         }
     }
 
+    // Valida los campos del formulario
     private boolean validarFormulario() {
         boolean esValido = true;
         StringBuilder errores = new StringBuilder();
@@ -333,6 +335,7 @@ public class HorariosFragment extends Fragment {
         btnInscribirse.postDelayed(this::enviarCorreo, 1000);
     }
 
+    // Envía email con los datos de inscripción
     private void enviarCorreo() {
         String nombre = campoNombre.getText().toString().trim();
         String fechaNacimiento = campoFechaNacimiento.getText().toString().trim();

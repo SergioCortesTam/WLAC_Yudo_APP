@@ -28,14 +28,12 @@ import java.util.List;
 import java.util.Locale;
 
 public class AlumnoFragment extends Fragment {
-
+    // Campos de texto para mostrar información del alumno
     private TextView tvNombre, tvCinturon, tvClases, tvFechaRegistro, tvAsistenciasTotal, tvAsistenciasMes;
     private Button btnVerAsistencia;
-    private View viewColorCinturon;
-    private LinearLayout headerLayout;
-    private FirebaseFirestore db;
-
-    public AlumnoFragment() {}
+    private View viewColorCinturon; // Vista para mostrar color del cinturón
+    private LinearLayout headerLayout; // Layout principal del encabezado
+    private FirebaseFirestore db; // Instancia de Firestore
 
     @Nullable
     @Override
@@ -44,7 +42,7 @@ public class AlumnoFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_alumno, container, false);
 
-        // Referencias a las vistas
+        // Obtener referencias a los elementos de la interfaz
         tvNombre = view.findViewById(R.id.tv_alumno_nombre);
         tvCinturon = view.findViewById(R.id.tv_alumno_cinturon);
         tvClases = view.findViewById(R.id.tv_clases_alumno);
@@ -57,18 +55,20 @@ public class AlumnoFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
-        // Inicializar valores
+        // Valores iniciales para las asistencias
         tvAsistenciasTotal.setText("0");
         tvAsistenciasMes.setText("0");
 
+        // Obtener email del usuario actual
         String email = FirebaseAuth.getInstance().getCurrentUser() != null
                 ? FirebaseAuth.getInstance().getCurrentUser().getEmail()
                 : null;
 
         if (email != null) {
-            // Mostrar estado de carga
+            // Mostrar estado de carga mientras se obtienen datos
             tvNombre.setText("Cargando...");
 
+            // Consultar datos del usuario en Firestore
             db.collection("users")
                     .whereEqualTo("email", email)
                     .get()
@@ -76,11 +76,11 @@ public class AlumnoFragment extends Fragment {
                         if (!querySnapshot.isEmpty()) {
                             DocumentSnapshot doc = querySnapshot.getDocuments().get(0);
 
-                            // Nombre
+                            // Configurar nombre
                             String nombre = doc.getString("nombre");
                             tvNombre.setText(nombre != null ? nombre : "Nombre no disponible");
 
-                            // Cinturón
+                            // Configurar cinturón y su color
                             String cinturon = doc.getString("cinturon");
                             if (cinturon != null) {
                                 tvCinturon.setText(cinturon);
@@ -90,10 +90,10 @@ public class AlumnoFragment extends Fragment {
                             } else {
                                 tvCinturon.setText("No asignado");
                                 setBeltColor(Color.GRAY);
-                                setHeaderColor(Color.parseColor("#667eea")); // Color por defecto
+                                setHeaderColor(Color.parseColor("#667eea"));
                             }
 
-                            // Clases
+                            // Configurar clases asignadas
                             Object clasesField = doc.get("clases");
                             if (clasesField instanceof List) {
                                 List<String> clases = (List<String>) clasesField;
@@ -107,7 +107,7 @@ public class AlumnoFragment extends Fragment {
                                 tvClases.setText("No hay clases asignadas");
                             }
 
-                            // Fecha de registro
+                            // Configurar fecha de registro
                             com.google.firebase.Timestamp fecha = doc.getTimestamp("fecha_registro");
                             if (fecha != null) {
                                 Date date = fecha.toDate();
@@ -117,11 +117,11 @@ public class AlumnoFragment extends Fragment {
                                 tvFechaRegistro.setText("N/A");
                             }
 
-                            // Cargar asistencias
+                            // Cargar datos de asistencias
                             String alumnoId = doc.getId();
                             cargarAsistencias(alumnoId);
 
-                            // Animar la entrada del contenido
+                            // Animar elementos de la interfaz
                             animateContent();
 
                         } else {
@@ -133,9 +133,9 @@ public class AlumnoFragment extends Fragment {
             tvNombre.setText("Usuario no autenticado");
         }
 
-        // Configurar botón
+        // Configurar acción del botón "Ver Asistencia"
         btnVerAsistencia.setOnClickListener(v -> {
-            // Animación simple del botón
+            // Animación de pulsación
             v.animate()
                     .scaleX(0.95f)
                     .scaleY(0.95f)
@@ -147,7 +147,7 @@ public class AlumnoFragment extends Fragment {
                                 .setDuration(100)
                                 .start();
 
-                        // Navegar
+                        // Navegar al fragmento de asistencias
                         getParentFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.main_content, new VerAsistenciasAlumnoFragment())
@@ -160,8 +160,8 @@ public class AlumnoFragment extends Fragment {
         return view;
     }
 
+    // Establece el color del cinturón como círculo
     private void setBeltColor(int color) {
-        // Crear un círculo coloreado
         GradientDrawable circle = new GradientDrawable();
         circle.setShape(GradientDrawable.OVAL);
         circle.setColor(color);
@@ -169,8 +169,8 @@ public class AlumnoFragment extends Fragment {
         viewColorCinturon.setBackground(circle);
     }
 
+    // Establece color degradado para el encabezado
     private void setHeaderColor(int color) {
-        // Crear gradiente para el header
         int[] colors = {
                 adjustColorBrightness(color, 1.1f),
                 adjustColorBrightness(color, 0.8f)
@@ -182,6 +182,7 @@ public class AlumnoFragment extends Fragment {
         headerLayout.setBackground(gradient);
     }
 
+    // Ajusta el brillo de un color
     private int adjustColorBrightness(int color, float factor) {
         int red = Math.round(Color.red(color) * factor);
         int green = Math.round(Color.green(color) * factor);
@@ -194,30 +195,22 @@ public class AlumnoFragment extends Fragment {
         return Color.rgb(red, green, blue);
     }
 
+    // Devuelve color correspondiente a cada cinturón
     private int getColorForCinturon(String cinturon) {
         switch (cinturon.toLowerCase(Locale.ROOT)) {
-            case "blanco":
-                return Color.parseColor("#E8E8E8");
-            case "amarillo":
-                return Color.parseColor("#FFD600");
-            case "naranja":
-                return Color.parseColor("#FF6D00");
-            case "verde":
-                return Color.parseColor("#4CAF50");
-            case "azul":
-                return Color.parseColor("#2196F3");
-            case "marrón":
-            case "marron":
-                return Color.parseColor("#8D6E63");
-            case "negro":
-                return Color.parseColor("#424242");
-            case "rojo":
-                return Color.parseColor("#F44336");
-            default:
-                return Color.parseColor("#9E9E9E");
+            case "blanco": return Color.parseColor("#E8E8E8");
+            case "amarillo": return Color.parseColor("#FFD600");
+            case "naranja": return Color.parseColor("#FF6D00");
+            case "verde": return Color.parseColor("#4CAF50");
+            case "azul": return Color.parseColor("#2196F3");
+            case "marrón": case "marron": return Color.parseColor("#8D6E63");
+            case "negro": return Color.parseColor("#424242");
+            case "rojo": return Color.parseColor("#F44336");
+            default: return Color.parseColor("#9E9E9E");
         }
     }
 
+    // Carga las asistencias desde Firestore
     private void cargarAsistencias(String alumnoId) {
         // Asistencias totales
         db.collection("asistencias")
@@ -252,6 +245,7 @@ public class AlumnoFragment extends Fragment {
                 .addOnFailureListener(e -> tvAsistenciasMes.setText("-"));
     }
 
+    // Anima el contador de asistencias
     private void animateCounter(TextView textView, int targetValue) {
         ValueAnimator animator = ValueAnimator.ofInt(0, targetValue);
         animator.setDuration(800);
@@ -263,8 +257,8 @@ public class AlumnoFragment extends Fragment {
         animator.start();
     }
 
+    // Anima la aparición del contenido
     private void animateContent() {
-        // Animación simple de entrada
         View[] views = {tvNombre, tvCinturon, tvClases, btnVerAsistencia};
 
         for (int i = 0; i < views.length; i++) {

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Tarjeta que muestra la información de una asistencia individual -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -8,6 +9,7 @@
     app:cardCornerRadius="@dimen/corner_md"
     app:cardElevation="@dimen/elevation_card">
 
+    <!-- Contenedor principal en horizontal: info a la izquierda, estado a la derecha -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,12 +17,14 @@
         android:padding="@dimen/spacing_md"
         android:background="@color/white">
 
+        <!-- Columna con fecha y nombre de la clase -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Fecha de asistencia -->
             <TextView
                 android:id="@+id/txt_fecha_asistencia"
                 android:layout_width="wrap_content"
@@ -30,6 +34,7 @@
                 android:drawableStart="@drawable/ic_usuario"
                 android:drawablePadding="@dimen/spacing_sm"/>
 
+            <!-- Nombre de la clase a la que asistió -->
             <TextView
                 android:id="@+id/txt_clase_asistencia"
                 android:layout_width="wrap_content"
@@ -39,6 +44,7 @@
                 android:layout_marginTop="@dimen/spacing_xs"/>
         </LinearLayout>
 
+        <!-- Estado visual de la asistencia (presente/ausente) con color de fondo -->
         <TextView
             android:id="@+id/txt_estado_asistencia"
             android:layout_width="wrap_content"

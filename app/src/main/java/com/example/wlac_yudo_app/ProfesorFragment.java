@@ -21,6 +21,7 @@ import com.google.firebase.firestore.*;
 import java.util.*;
 
 public class ProfesorFragment extends Fragment {
+    // Fragmento con menú de opciones para profesores
 
     private MaterialCardView cardGestionarCinturones, cardVerClases, cardMarcarAsistencia, cardAnadirProducto;
     private FirebaseFirestore db;
@@ -36,7 +37,7 @@ public class ProfesorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profesor, container, false);
 
         db = FirebaseFirestore.getInstance();
-
+        // Obtener referencias de las cards
         cardGestionarCinturones = view.findViewById(R.id.card_gestionar_cinturones);
         cardVerClases           = view.findViewById(R.id.card_ver_clases);
         cardMarcarAsistencia    = view.findViewById(R.id.card_marcar_asistencia);
@@ -58,7 +59,7 @@ public class ProfesorFragment extends Fragment {
                     if (alumnoIds == null) alumnoIds = new ArrayList<>();
                     if (alumnoNombres == null) alumnoNombres = new ArrayList<>();
                 });
-
+        // Asignar listeners a las cards
         cardGestionarCinturones.setOnClickListener(v -> mostrarDialogCinturones());
         cardVerClases.setOnClickListener(v -> mostrarDialogClases());
         cardMarcarAsistencia.setOnClickListener(v -> replaceFragment(new MarcarAsistenciaFragment()));
@@ -67,13 +68,13 @@ public class ProfesorFragment extends Fragment {
         return view;
     }
 
-    /** Detecta si está en modo oscuro */
+
     private boolean esModoOscuro() {
         int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
     }
 
-    /** Método helper para crear diálogos con colores corregidos */
+// metodo para corregir los colores modo oscuro y claro
     private AlertDialog crearDialogoConColoresCorregidos(String titulo, View contenido,
                                                          DialogInterface.OnClickListener positiveListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
-
+    // Adaptador para mostrar productos en RecyclerView
     private List<Producto> productos;
     private Context context;
 
@@ -39,11 +39,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     @Override
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
         Producto producto = productos.get(position);
-
+        // Configurar datos del producto
         holder.tvNombre.setText(producto.getNombre());
         holder.tvPrecio.setText(String.format(Locale.getDefault(), "€%.2f", producto.getPrecio()));
 
-        // Configurar imagen
+        // Configurar imagen  Cargar imagen con Glide
         if (producto.getImageUrl() != null && !producto.getImageUrl().isEmpty()) {
             Glide.with(context)
                     .load(producto.getImageUrl())
@@ -62,12 +62,13 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         // Configurar listeners para cambio de tipo de talla
         holder.setupTallaListeners();
 
-        // Click en el item para mostrar descripción
+        // Mostrar descripción al hacer clic
         holder.itemView.setOnClickListener(v -> {
             Toast.makeText(context, producto.getDescripcion(), Toast.LENGTH_LONG).show();
         });
 
-        // Botón añadir al carrito
+
+        // Añadir al carrito
         holder.btnAnadirCarrito.setOnClickListener(v -> {
             String tallaSeleccionada = holder.getTallaSeleccionada();
             CartManager.getInstance().addItem(producto, tallaSeleccionada);
@@ -87,6 +88,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     }
 
     static class ProductoViewHolder extends RecyclerView.ViewHolder {
+        // Views para cada item de producto
         ImageView imgProducto;
         TextView tvNombre, tvPrecio;
         Button btnAnadirCarrito;
@@ -96,6 +98,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
 
         public ProductoViewHolder(@NonNull View itemView) {
             super(itemView);
+            // Obtener referencias de vistas
             imgProducto = itemView.findViewById(R.id.img_producto);
             tvNombre = itemView.findViewById(R.id.txt_nombre_producto);
             tvPrecio = itemView.findViewById(R.id.txt_precio_producto);
@@ -106,7 +109,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             spinnerTallasNinos = itemView.findViewById(R.id.spinner_tallas_ninos);
             spinnerTallasAdultos = itemView.findViewById(R.id.spinner_tallas_adultos);
         }
-
+        // Configurar opciones de tallas
         public void setupSpinners() {
             // Configurar spinner de tallas para niños (3-16 años)
             String[] tallasNinos = {"3 años", "4 años", "5 años", "6 años", "7 años", "8 años",
@@ -124,7 +127,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             adapterAdultos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerTallasAdultos.setAdapter(adapterAdultos);
         }
-
+        // Cambiar entre tallas de niños y adultos
         public void setupTallaListeners() {
             radioGroupTipoTalla.setOnCheckedChangeListener((group, checkedId) -> {
                 if (checkedId == R.id.radio_ninos) {
@@ -136,7 +139,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
                 }
             });
         }
-
+        // Obtener talla seleccionada
         public String getTallaSeleccionada() {
             if (radioNinos.isChecked()) {
                 return spinnerTallasNinos.getSelectedItem().toString();

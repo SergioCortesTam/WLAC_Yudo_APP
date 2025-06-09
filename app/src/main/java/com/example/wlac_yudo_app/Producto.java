@@ -2,19 +2,22 @@ package com.example.wlac_yudo_app;
 
 import com.google.firebase.firestore.PropertyName; // Import this
 
+
 public class Producto {
-    private String id; // Firestore document ID
+    // Modelo para representar productos en la tienda
+
+    private String id; // ID de Firestore
     private String nombre;
     private String descripcion;
     private double precio;
     private String categoria;
-    private String imageUrl;
+    private String imageUrl; // URL de la imagen
 
-    public Producto() {
-        // Firestore necesita un constructor vacío
-    }
+    // Constructor vacío requerido por Firestore
+    public Producto() {}
 
-    public Producto(String nombre, String descripcion, double precio, String categoria, String imageUrl) {
+    public Producto(String nombre, String descripcion, double precio,
+                    String categoria, String imageUrl) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -22,23 +25,25 @@ public class Producto {
         this.imageUrl = imageUrl;
     }
 
-    // Getters
+    // Getters y setters
     public String getId() { return id; }
-    public String getNombre() { return nombre; }
-    public String getDescripcion() { return descripcion; }
-    public double getPrecio() { return precio; }
-    public String getCategoria() { return categoria; }
-
-    @PropertyName("imageUrl")  // Getters y setters compatibles con Firestore
-    public String getImageUrl() { return imageUrl; }
-
-
-    // Setters
     public void setId(String id) { this.id = id; }
+
+    public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getDescripcion() { return descripcion; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+
+    public double getPrecio() { return precio; }
     public void setPrecio(double precio) { this.precio = precio; }
+
+    public String getCategoria() { return categoria; }
     public void setCategoria(String categoria) { this.categoria = categoria; }
+
+    // Anotaciones para compatibilidad con Firestore
+    @PropertyName("imageUrl")
+    public String getImageUrl() { return imageUrl; }
 
     @PropertyName("imageUrl")
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }

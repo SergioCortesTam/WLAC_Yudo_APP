@@ -15,57 +15,49 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 public class PerfilFragment extends Fragment {
+    // Fragmento que decide qué perfil mostrar (alumno o profesor)
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    public PerfilFragment() {
-        // Constructor vacío obligatorio
-    }
-
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
 
+        // Inicializar Firebase
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         FirebaseUser usuarioActual = mAuth.getCurrentUser();
 
         if (usuarioActual != null) {
-            // Aquí buscamos en la base de datos si es profesor o alumno
-            String userId = usuarioActual.getUid();
-
-            // Imaginemos que en la base de datos tienes un nodo "users/{userId}/role"
-            mDatabase.child("users").child(userId).child("role")
+            // Consultar rol del usuario en Firebase
+            mDatabase.child("users").child(usuarioActual.getUid()).child("role")
                     .get()
                     .addOnSuccessListener(snapshot -> {
                         if (snapshot.exists()) {
                             String rol = snapshot.getValue(String.class);
+                            // Cargar fragmento según el rol
                             if ("profesor".equals(rol)) {
                                 cargarFragmento(new ProfesorFragment());
                             } else {
                                 cargarFragmento(new AlumnoFragment());
                             }
                         } else {
-                            // Por defecto consideramos alumno
+                            // Por defecto mostrar perfil de alumno
                             cargarFragmento(new AlumnoFragment());
                         }
-                    })
-                    .addOnFailureListener(e -> {
-                        // Error leyendo el rol -> mandamos a alumno por defecto
-                        cargarFragmento(new AlumnoFragment());
                     });
         }
 
         return view;
     }
 
+    // Carga el fragmento correspondiente en el contenedor
     private void cargarFragmento(Fragment fragment) {
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, fragment);

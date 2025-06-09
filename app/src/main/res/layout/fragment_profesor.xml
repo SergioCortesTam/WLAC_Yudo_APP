@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Scroll principal que contiene todas las opciones del profesor -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,6 +16,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Mensaje de bienvenida al profesor -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +42,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Sección de acciones para el profesor -->
+            <!-- Título para la sección de accesos rápidos -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,6 +52,7 @@
                 android:layout_marginBottom="8dp"
                 android:textColor="@color/text_primary" />
 
+            <!-- Opción: Gestión de cinturones -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_gestionar_cinturones"
                 android:layout_width="match_parent"
@@ -102,6 +105,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Opción: Ver clases de los alumnos -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_ver_clases"
                 android:layout_width="match_parent"
@@ -154,6 +158,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Opción: Marcar asistencia -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_marcar_asistencia"
                 android:layout_width="match_parent"
@@ -205,6 +210,8 @@
                         android:contentDescription="Ir a marcar asistencia" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <!-- Opción: Añadir nuevo producto -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_anadir_producto"
                 android:layout_width="match_parent"
@@ -222,12 +229,14 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_add_shopping_cart" /> <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Añadir Producto"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:layout_marginTop="8dp"/>
+                        android:src="@drawable/ic_add_shopping_cart" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Añadir Producto"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:layout_marginTop="8dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -240,7 +249,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- FAB para añadir una nueva clase o evento -->
+    <!-- Botón flotante para añadir una clase nueva -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_class"
         android:layout_width="wrap_content"

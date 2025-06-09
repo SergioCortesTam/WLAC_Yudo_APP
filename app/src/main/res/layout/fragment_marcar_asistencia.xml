@@ -6,19 +6,21 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Navegación de fecha -->
+    <!-- Contenedor superior con botones para cambiar de fecha -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
+        <!-- Botón para ir al día anterior -->
         <Button
             android:id="@+id/btn_fecha_anterior"
             android:text="&lt;"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <!-- Texto que muestra la fecha actual -->
         <TextView
             android:id="@+id/txt_fecha_asistencia"
             android:text="Fecha:"
@@ -28,13 +30,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_height="wrap_content"
-
             android:autoSizeTextType="uniform"
             android:autoSizeMinTextSize="12sp"
             android:autoSizeMaxTextSize="18sp"
             android:autoSizeStepGranularity="2sp" />
 
-
+        <!-- Botón para ir al día siguiente -->
         <Button
             android:id="@+id/btn_fecha_siguiente"
             android:text="&gt;"
@@ -42,22 +43,22 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-
-    <!-- Lista de alumnos -->
+    <!-- Scroll que contiene el listado de alumnos -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginTop="16dp">
 
+        <!-- Aquí se añadirán dinámicamente las vistas de cada alumno -->
         <LinearLayout
-        android:id="@+id/layout_alumno"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            android:id="@+id/layout_alumno"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </ScrollView>
 
-    <!-- Botón para guardar todas las asistencias -->
+    <!-- Botón que guarda todas las asistencias marcadas -->
     <Button
         android:id="@+id/btn_guardar_asistencias"
         android:layout_width="match_parent"

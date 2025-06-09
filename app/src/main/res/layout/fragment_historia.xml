@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Imagen de cabecera con efecto parallax -->
+        <!-- Tarjeta principal con imagen y texto sobre la historia del club -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!-- Imagen representativa del club -->
                 <ImageView
                     android:id="@+id/imagen_club"
                     android:layout_width="match_parent"
@@ -32,6 +33,7 @@
                     android:src="@drawable/ic_wlac"
                     android:contentDescription="Logo del club" />
 
+                <!-- Título y descripción de la historia -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -58,7 +60,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Card de valores -->
+        <!-- Tarjeta que explica los valores del club -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,6 +75,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_lg">
 
+                <!-- Título de la sección -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,6 +84,7 @@
                     android:textColor="@color/primary"
                     android:layout_marginBottom="@dimen/spacing_md" />
 
+                <!-- Valor: Respeto -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -114,6 +118,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <!-- Valor: Disciplina -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -147,6 +152,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <!-- Valor: Superación -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -181,7 +187,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Call to action -->
+        <!-- Tarjeta promocional con botón para contactar -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -196,6 +202,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_lg">
 
+                <!-- Llamado a la acción para nuevos alumnos -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -207,11 +214,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="En WLAC Yudo te ofrecemos clases grupales e individuales que son adecuadas tanto para principiantes como para expertos."
+                    android:text="En WLAC Yudo te ofrecemos clases grupales e individuales..."
                     android:textAppearance="@style/TextAppearance.App.Body"
                     android:textColor="@color/text_white"
                     android:layout_marginBottom="@dimen/spacing_md" />
 
+                <!-- Botón para contactar por email -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_contactar"
                     android:layout_width="wrap_content"
@@ -227,7 +235,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Mapa interactivo -->
+        <!-- Mapa de ubicación del dojo con imagen simulada -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -241,6 +249,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_lg">
 
+                <!-- Título del mapa -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -249,11 +258,12 @@
                     android:textColor="@color/primary"
                     android:layout_marginBottom="@dimen/spacing_md" />
 
+                <!-- Mapa simulado con un marcador centrado -->
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
 
-                    <!-- Puedes reemplazar esta imagen por un mapa real si integras un MapView -->
+                    <!-- Imagen estática del mapa, clicable para abrir la app de mapas -->
                     <ImageView
                         android:id="@+id/img_mapa"
                         android:layout_width="match_parent"
@@ -265,7 +275,7 @@
                         android:foreground="?attr/selectableItemBackground"
                         android:contentDescription="Haz clic para abrir la ubicación en el mapa" />
 
-                    <!-- Marcador para indicar la ubicación exacta -->
+                    <!-- Marcador visual sobre el mapa -->
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
@@ -274,6 +284,7 @@
                         android:contentDescription="Marcador de ubicación" />
                 </FrameLayout>
 
+                <!-- Dirección del dojo bajo el mapa -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

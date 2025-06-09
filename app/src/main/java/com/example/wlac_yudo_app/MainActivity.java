@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         // Fragmento inicial
         cargarFragmento(new HistoriaFragment(), false);
 
-        // Tabs
+        // Configurar tabs de navegación
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                         : R.drawable.ic_usuario_bloqueado
         );
     }
-
+    // Muestra menú de perfil
     private void mostrarMenuSesion(View anchor) {
         androidx.appcompat.widget.PopupMenu menu = new androidx.appcompat.widget.PopupMenu(this, anchor);
         menu.getMenuInflater().inflate(R.menu.menu_sesion, menu.getMenu());
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         });
         menu.show();
     }
-
+    // Carga un fragmento en el contenedor principal
     private void cargarFragmento(Fragment fragment, boolean addToBackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_content, fragment);
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     private void abrirEnlace(String url) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
-
+    // Determina qué perfil mostrar (alumno/profesor)
     private void mostrarPerfilSegunRol() {
         String email = mAuth.getCurrentUser() != null ?
                 mAuth.getCurrentUser().getEmail() : null;

@@ -6,6 +6,7 @@
     android:padding="16dp"
     tools:context=".CarritoFragment">
 
+    <!-- Título principal del fragmento del carrito -->
     <TextView
         android:id="@+id/txt_titulo_carrito"
         android:layout_width="wrap_content"
@@ -16,6 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"/>
 
+    <!-- Lista de productos añadidos al carrito -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_carrito_items"
         android:layout_width="match_parent"
@@ -23,6 +25,7 @@
         android:layout_below="@id/txt_titulo_carrito"
         android:layout_above="@+id/layout_total_carrito" />
 
+    <!-- Sección que muestra el total a pagar -->
     <LinearLayout
         android:id="@+id/layout_total_carrito"
         android:layout_width="match_parent"
@@ -31,6 +34,7 @@
         android:layout_above="@id/btn_solicitar_productos"
         android:layout_marginBottom="16dp">
 
+        <!-- Texto con el total del precio de los productos -->
         <TextView
             android:id="@+id/txt_total_carrito"
             android:layout_width="wrap_content"
@@ -41,6 +45,7 @@
             android:layout_gravity="end"/>
     </LinearLayout>
 
+    <!-- Botón para enviar el pedido por correo electrónico -->
     <Button
         android:id="@+id/btn_solicitar_productos"
         android:layout_width="match_parent"
@@ -48,6 +53,7 @@
         android:text="Solicitar Productos (Enviar Email)"
         android:layout_alignParentBottom="true"/>
 
+    <!-- Mensaje alternativo si el carrito está vacío -->
     <TextView
         android:id="@+id/txt_carrito_vacio"
         android:layout_width="wrap_content"

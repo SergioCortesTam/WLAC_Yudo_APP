@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_light">
 
-    <!-- Progress Bar con mensaje de carga -->
+    <!-- Barra de progreso que se muestra mientras se carga el perfil -->
     <ProgressBar
         android:id="@+id/barra_progreso"
         android:layout_width="wrap_content"
@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
+    <!-- Mensaje que aparece debajo de la barra mientras carga -->
     <TextView
         android:id="@+id/txt_cargando"
         android:layout_width="wrap_content"
@@ -30,27 +31,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barra_progreso" />
 
-    <!-- Contenedor para información de perfil (inicialmente invisible) -->
+    <!-- ScrollView que contiene el contenido del perfil (se muestra después de cargar) -->
+    <!-- Oculto al inicio         android:visibility="gone" -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_perfil"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/contenedor_perfil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+    <!-- Contenedor donde se cargará dinámicamente la información del usuario -->
+    <LinearLayout
+        android:id="@+id/contenedor_perfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-            <!-- Aquí irá el contenido del perfil cuando se cargue -->
+        <!-- Aquí se insertarán las vistas del perfil una vez que los datos estén listos -->
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

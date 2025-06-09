@@ -6,13 +6,14 @@
     android:background="@color/secondary"
     android:fillViewport="true">
 
+    <!-- Contenedor principal vertical para mostrar el contenido desplazable -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Tarjeta principal del perfil -->
+        <!-- Tarjeta que muestra el perfil del alumno -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Header con color dinámico -->
+                <!-- Encabezado con color del club y avatar del usuario -->
                 <LinearLayout
                     android:id="@+id/header_layout"
                     android:layout_width="match_parent"
@@ -36,7 +37,7 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Avatar -->
+                    <!-- Imagen de perfil del alumno en formato circular -->
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/avatar_alumno"
                         android:layout_width="70dp"
@@ -47,17 +48,16 @@
                         app:shapeAppearanceOverlay="@style/CircleImageView"
                         app:strokeColor="@android:color/white"
                         app:strokeWidth="3dp" />
-
                 </LinearLayout>
 
-                <!-- Contenido del perfil -->
+                <!-- Información del alumno (nombre, cinturón, estadísticas) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <!-- Nombre -->
+                    <!-- Nombre del alumno en el centro de la pantalla -->
                     <TextView
                         android:id="@+id/tv_alumno_nombre"
                         android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <!-- Cinturón -->
+                    <!-- Sección visual del cinturón y su color -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -81,6 +81,7 @@
                         android:padding="10dp"
                         android:layout_marginTop="8dp">
 
+                        <!-- Vista circular para mostrar el color del cinturón -->
                         <View
                             android:id="@+id/view_color_cinturon"
                             android:layout_width="16dp"
@@ -88,6 +89,7 @@
                             android:layout_marginEnd="8dp"
                             android:background="@drawable/ic_circle" />
 
+                        <!-- Texto con el nombre del color del cinturón -->
                         <TextView
                             android:id="@+id/tv_alumno_cinturon"
                             android:layout_width="wrap_content"
@@ -97,6 +99,7 @@
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
+                        <!-- Etiqueta adicional para indicar que es el cinturón -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -104,10 +107,9 @@
                             android:text="Cinturón"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
-
                     </LinearLayout>
 
-                    <!-- Fila de estadísticas -->
+                    <!-- Sección con tres bloques de estadísticas del alumno -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -115,7 +117,7 @@
                         android:orientation="horizontal"
                         android:weightSum="3">
 
-                        <!-- Miembro desde -->
+                        <!-- Fecha en la que el alumno se unió al club -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -143,10 +145,9 @@
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
-
                         </LinearLayout>
 
-                        <!-- Asistencias totales -->
+                        <!-- Cantidad total de asistencias registradas -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -174,10 +175,9 @@
                                 android:textColor="@color/text_primary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
-
                         </LinearLayout>
 
-                        <!-- Asistencias del mes -->
+                        <!-- Número de asistencias durante el mes actual -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -205,12 +205,10 @@
                                 android:textColor="@color/text_primary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
-
                         </LinearLayout>
-
                     </LinearLayout>
 
-                    <!-- Información de clases -->
+                    <!-- Información sobre el horario del alumno -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -249,18 +247,13 @@
                                 android:text="Lunes y Miércoles 18:00-19:30"
                                 android:textColor="@color/text_primary"
                                 android:textSize="13sp" />
-
                         </LinearLayout>
-
                     </LinearLayout>
-
                 </LinearLayout>
-
             </LinearLayout>
-
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Botón de asistencia -->
+        <!-- Botón para acceder al historial de asistencias -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_ver_asistencia"
             android:layout_width="match_parent"
@@ -270,7 +263,5 @@
             android:textStyle="bold"
             app:backgroundTint="@color/primary"
             app:cornerRadius="25dp" />
-
     </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>
