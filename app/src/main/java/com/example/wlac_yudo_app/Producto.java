@@ -29,7 +29,7 @@ public class Producto {
     public double getPrecio() { return precio; }
     public String getCategoria() { return categoria; }
 
-    @PropertyName("imageUrl") // Use this if your Firestore field name is imageUrl
+    @PropertyName("imageUrl")  // Getters y setters compatibles con Firestore
     public String getImageUrl() { return imageUrl; }
 
 

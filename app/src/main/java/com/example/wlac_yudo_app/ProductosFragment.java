@@ -120,7 +120,6 @@ public class ProductosFragment extends Fragment {
     }
 
     private void loadProductos(String categoria) {
-        Log.d(TAG, "Cargando productos para la categoría: " + categoria);
         Query query = db.collection("productos").orderBy("timestamp", Query.Direction.DESCENDING);
 
         if (!"Todos".equalsIgnoreCase(categoria) && categoria != null) {
